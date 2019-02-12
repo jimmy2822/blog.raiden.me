@@ -11,30 +11,29 @@ keywords: ruby on rails, gamedav, game development, developer, web developer, ru
 author:
   name: Jimmy Wu
   link: https://github.com/jimmy2822
-about:
-  info: bloger engine powered by Hexo
-  address: Taipei
-  email: jimmy2822@gmail.com
 language: zh-tw
 timezone: Asia/Taipei
 
 # blog favicon 圖標 location: themes/hexo-theme-skapp/source/img
-favion_ico:
+favion_ico: /img/logo.png
 
 # 左上角主 Logo
-logo:
+logo: /img/logo.png
 
 # 文章預設封面
-default_cover:
+default_cover: https://cdn.pixabay.com/photo/2015/11/19/21/11/knowledge-1052013_960_720.jpg
+
+# 顯示在底部的圖片
+avatar:
 
 # Header 背景圖
-header_cover:
+header_cover: https://cdn.pixabay.com/photo/2015/11/19/21/11/knowledge-1052013_960_720.jpg
 
 # 404 背景圖
 error_page_bg:
 
 # loading 背景圖
-loader_img:
+loader_img: img/logo.png
 
 # theme skapp settings
 menu:
@@ -107,7 +106,8 @@ pagination_dir: page
 theme: hexo-theme-skapp
 
 # Disqus
-disqus_shortname: jimmy2822
+disqus_shortname: disqus_nIa8ICnEIf
+
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
