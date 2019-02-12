@@ -5,11 +5,42 @@
 # Site
 title: 硬底居米 IndieJimmy
 subtitle: 程式、遊戲、生活
-description:
-keywords: Ruby On Rails, Gamedav, Game Development, Developer
-author: Jimmy Wu
+subtitle_desc: 努力爬行的碼農...
+description: 硬底居米的海馬迴
+keywords: ruby on rails, gamedav, game development, developer, web developer, ruby
+author:
+  name: Jimmy Wu
+  link: https://github.com/jimmy2822
+about:
+  info: bloger engine powered by Hexo
+  address: Taipei
+  email: jimmy2822@gmail.com
 language: zh-tw
 timezone: Asia/Taipei
+
+# blog favicon 圖標 location: themes/hexo-theme-skapp/source/img
+favion_ico:
+
+# 左上角主 Logo
+logo:
+
+# 文章預設封面
+default_cover:
+
+# Header 背景圖
+header_cover:
+
+# 404 背景圖
+error_page_bg:
+
+# loading 背景圖
+loader_img:
+
+# theme skapp settings
+menu:
+  home: /
+  archive: /archives
+  about: /about
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -73,8 +104,10 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: hexo-theme-skapp
 
+# Disqus
+disqus_shortname: jimmy2822
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:

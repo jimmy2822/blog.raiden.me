@@ -1,0 +1,4 @@
+build_tools:
+  - name: Hexo
+    desc: Blog Framework
+    link: https://hexo.io/
