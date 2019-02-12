@@ -3,10 +3,8 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 硬底居米 IndieJimmy
-subtitle: 程式、遊戲、生活
+subtitle: 硬底居米 Indie Jimmy
 subtitle_desc: 努力爬行的碼農...
-description: 硬底居米的海馬迴
 keywords: ruby on rails, gamedav, game development, developer, web developer, ruby
 author:
   name: Jimmy Wu
@@ -106,7 +104,7 @@ pagination_dir: page
 theme: hexo-theme-skapp
 
 # Disqus
-disqus_shortname: disqus_nIa8ICnEIf
+disqus_shortname: blog-raiden-me
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
