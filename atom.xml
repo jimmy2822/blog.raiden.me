@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.raiden.me/"/>
-  <updated>2019-02-12T08:47:19.000Z</updated>
+  <updated>2019-02-12T11:16:23.000Z</updated>
   <id>https://blog.raiden.me/</id>
   
   <author>
@@ -17,11 +17,61 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Yoooo</title>
+    <link href="https://blog.raiden.me/2019/02/12/Yoooo/"/>
+    <id>https://blog.raiden.me/2019/02/12/Yoooo/</id>
+    <published>2019-02-12T09:26:24.000Z</published>
+    <updated>2019-02-12T11:16:23.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://blog.raiden.me/2019/02/12/hello-world/"/>
+    <id>https://blog.raiden.me/2019/02/12/hello-world/</id>
+    <published>2019-02-12T09:19:59.000Z</published>
+    <updated>2019-02-12T09:19:59.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>title: 你所不知道的101個不知道<br>subtitle: 真的假的?<br>author: Indie Jimmy</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;title: 你所不知道的101個不知道&lt;br&gt;subtitle: 真的假的?&lt;br&gt;author: Indie Jimmy&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>secondTest</title>
+    <link href="https://blog.raiden.me/2019/02/12/secondTest/"/>
+    <id>https://blog.raiden.me/2019/02/12/secondTest/</id>
+    <published>2019-02-12T09:06:47.000Z</published>
+    <updated>2019-02-12T09:23:20.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>你所不知道的不知道們</title>
     <link href="https://blog.raiden.me/2019/02/12/firstPost/"/>
     <id>https://blog.raiden.me/2019/02/12/firstPost/</id>
     <published>2019-02-12T08:42:16.000Z</published>
-    <updated>2019-02-12T08:47:19.000Z</updated>
+    <updated>2019-02-12T09:19:59.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="你以為…"><a href="#你以為…" class="headerlink" title="你以為…"></a>你以為…</h1><hr><p>嘿嘿嘿….</p><h2 id="help"><a href="#help" class="headerlink" title="help~~~"></a>help~~~</h2>]]></content>
     
@@ -44,28 +94,6 @@
       <category term="game" scheme="https://blog.raiden.me/tags/game/"/>
     
       <category term="dev" scheme="https://blog.raiden.me/tags/dev/"/>
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="https://blog.raiden.me/2019/02/12/hello-world/"/>
-    <id>https://blog.raiden.me/2019/02/12/hello-world/</id>
-    <published>2019-02-12T02:21:46.000Z</published>
-    <updated>2019-02-12T08:31:09.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>title: 你所不知道的101個不知道<br>subtitle: 真的假的?<br>author: Indie Jimmy</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;title: 你所不知道的101個不知道&lt;br&gt;subtitle: 真的假的?&lt;br&gt;author: Indie Jimmy&lt;/p&gt;
-
-      
-    
-    </summary>
-    
     
   </entry>
   
