@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>硬底居米 IndieJimmy</title>
+  <title>Hexo</title>
   
-  <subtitle>程式、遊戲、生活</subtitle>
+  <subtitle>硬底居米 Indie Jimmy</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.raiden.me/"/>
-  <updated>2019-02-12T11:16:23.000Z</updated>
+  <updated>2019-02-12T13:08:57.000Z</updated>
   <id>https://blog.raiden.me/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://blog.raiden.me/2019/02/12/Yoooo/"/>
     <id>https://blog.raiden.me/2019/02/12/Yoooo/</id>
     <published>2019-02-12T09:26:24.000Z</published>
-    <updated>2019-02-12T11:16:23.000Z</updated>
+    <updated>2019-02-12T13:08:57.000Z</updated>
     
     <summary type="html">
     
