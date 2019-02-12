@@ -77,7 +77,8 @@ theme: landscape
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
-type: git
-repo:  git@github.com:jimmy2822/blog.raiden.me.git
-branch: gh-pages
-message:
+deploy:
+  type: git
+  repo: git@github.com:jimmy2822/blog.raiden.me.git
+  branch: gh-pages
+  message:
