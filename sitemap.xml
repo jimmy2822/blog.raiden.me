@@ -2,16 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://blog.raiden.me/2019/02/12/Yoooo/</loc>
+    <loc>https://blog.raiden.me/2019/02/12/secondTest/</loc>
     
-    <lastmod>2019-02-12T13:08:57.000Z</lastmod>
+    <lastmod>2019-02-12T13:51:58.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://blog.raiden.me/2019/02/12/secondTest/</loc>
+    <loc>https://blog.raiden.me/about/index.html</loc>
     
-    <lastmod>2019-02-12T09:23:20.000Z</lastmod>
+    <lastmod>2019-02-12T13:47:18.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.raiden.me/2019/02/12/Yoooo/</loc>
+    
+    <lastmod>2019-02-12T13:08:57.000Z</lastmod>
     
   </url>
   
@@ -40,13 +47,6 @@
     <loc>https://blog.raiden.me/search/index.html</loc>
     
     <lastmod>2019-02-12T06:36:16.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.raiden.me/about/index.html</loc>
-    
-    <lastmod>2019-02-12T06:35:10.000Z</lastmod>
     
   </url>
   
