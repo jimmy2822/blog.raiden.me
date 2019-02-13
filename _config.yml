@@ -19,13 +19,13 @@ favion_ico: /img/logo.png
 logo: /img/logo.png
 
 # 文章預設封面
-default_cover: https://cdn.pixabay.com/photo/2015/11/19/21/11/knowledge-1052013_960_720.jpg
+default_cover: /img/default_cover.jpg
 
 # 顯示在底部的圖片
 avatar:
 
 # Header 背景圖
-header_cover: https://cdn.pixabay.com/photo/2015/11/19/21/11/knowledge-1052013_960_720.jpg
+header_cover: /img/header.jpg
 
 # 404 背景圖
 error_page_bg:
