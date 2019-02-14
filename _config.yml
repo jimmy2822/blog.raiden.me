@@ -3,6 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
+title: 硬底居米的部落格 | The Blog Of Indie Jimmy
 subtitle: 硬底居米 Indie Jimmy
 subtitle_desc: 努力爬行的碼農...
 description: 硬底居米的部落格，關於寫程式、遊戲、電影、音樂、閱讀...
@@ -35,14 +36,13 @@ loader_img: /img/loading.gif
 menu:
   home: /
   archive: /archives
-  about: /about
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://blog.raiden.me
 root: /
 permalink: :year/:month/:day/:title/
-permalink_defaults:
+# permalink_defaults:
 
 # Directory
 source_dir: source
@@ -52,7 +52,7 @@ archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
-skip_render:
+# skip_render:
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -68,7 +68,7 @@ highlight:
   enable: true
   line_number: true
   auto_detect: false
-  tab_replace:
+  tab_replace: true
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
@@ -81,8 +81,8 @@ index_generator:
 
 # Category & Tag
 default_category: uncategorized
-category_map:
-tag_map:
+# category_map:
+# tag_map:
 
 # Date / Time format
 ## Hexo uses Moment.js to parse and display date
@@ -119,3 +119,13 @@ deploy:
 lazyload:
   enable: true
   onlypost: false
+
+# Feed Atom
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+
+# Sitemap
+sitemap:
+  path: sitemap.xml
