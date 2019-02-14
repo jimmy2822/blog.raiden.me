@@ -26,10 +26,10 @@ default_cover: /img/default_cover.jpg
 header_cover: /img/header.jpg
 
 # 404 背景圖
-error_page_bg:
+# error_page_bg:
 
 # loading 背景圖
-loader_img:
+loader_img: /img/loading.gif
 
 # theme skapp settings
 menu:
