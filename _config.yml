@@ -28,7 +28,7 @@ header_cover: /img/header.jpg
 error_page_bg:
 
 # loading 背景圖
-loader_img: /img/logo.png
+loader_img:
 
 # theme skapp settings
 menu:
