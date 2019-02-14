@@ -1,0 +1,29 @@
+/**
+ * 标签基本样式设定
+ */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    font-family: $font-family;
+    font-size: $main-fs;
+    color: $main-fc;
+    line-height: 1.7;
+
+    background-color: $bgc--main;
+}
+
+.link {
+    font-size: inherit;
+    text-decoration: none;
+    transition: color $transition;
+
+    &:hover {
+        color: $main-color--hover;
+    }
+}

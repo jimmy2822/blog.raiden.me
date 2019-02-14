@@ -1,0 +1,64 @@
+body {
+    @media screen and (min-width: $mq-mobile) {
+        // .page__container {
+        //     width: $mq-mobile - 30px;
+        // }
+
+        .page__main {
+            padding-top: 80px;
+            padding-bottom: 80px;
+        }
+    }
+
+    @media screen and (min-width: $mq-desktop) {
+        .page__container {
+            width: $mq-desktop - 30px;
+        }
+
+        .page__sidebar {
+            width: 260px;
+            margin-top: 0;
+        }
+
+        .page__content {
+            flex: 1;
+        }
+    }
+
+    @media screen and (min-width: $mq-desktop--wide) {
+        .page__container {
+            width: $mq-desktop--wide - 30px;
+        }
+    }
+}
+
+.page {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.page__container {
+    flex: 1;
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 $pad;
+}
+
+.page__main {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.page__content {
+    width: 100%;
+}
+
+.page__sidebar {
+    width: 100%;
+    margin-top: 4 * $pad;
+}
