@@ -18,7 +18,8 @@ body {
 
     & > img {
         display: block;
-        width: 100%;
+        max-width: 930px;
+        max-height: 465px;
     }
 }
 
