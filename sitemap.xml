@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.raiden.me/2019/02/15/installing_rails_in_centos_7/</loc>
+    
+    <lastmod>2019-02-15T08:58:18.715Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.raiden.me/search/index.html</loc>
     
     <lastmod>2019-02-14T16:32:05.638Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>https://blog.raiden.me/404.html</loc>
     
     <lastmod>2019-02-14T15:52:22.461Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.raiden.me/2019/02/12/Yoooo/</loc>
-    
-    <lastmod>2019-02-12T13:08:57.000Z</lastmod>
     
   </url>
   
