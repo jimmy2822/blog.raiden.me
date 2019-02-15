@@ -38,7 +38,7 @@
             {% endif %}
         </p>
         <p itemprop="articleSection" class="min-article__desc">
-            {{ post.subtitle }}
+            {{ post.excerpt|striptags }}
         </p>
         <div class="min-article__tags">
             <i class="iconfont icon-tab"></i>
