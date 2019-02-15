@@ -108,7 +108,7 @@ body {
 }
 
 .mini-article__title {
-    font-size: $main-fs + 2px;
+    font-size: $main-fs + 4px;
     margin: 0;
     font-weight: 400;
     overflow: hidden;
@@ -149,6 +149,7 @@ body {
     word-break: break-all;
     line-height: 26px;
     height: 52px;
+    color: gray;
 }
 
 .min-article__tags {
