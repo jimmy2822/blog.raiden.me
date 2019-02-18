@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.raiden.me/"/>
-  <updated>2019-02-15T08:58:18.715Z</updated>
+  <updated>2019-02-18T09:09:17.965Z</updated>
   <id>https://blog.raiden.me/</id>
   
   <author>
@@ -17,66 +17,22 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>centOS 7 ｜從零部署 Ruby On Rails</title>
-    <link href="https://blog.raiden.me/2019/02/15/installing_rails_in_centos_7/"/>
-    <id>https://blog.raiden.me/2019/02/15/installing_rails_in_centos_7/</id>
-    <published>2019-02-15T02:53:51.000Z</published>
-    <updated>2019-02-15T08:58:18.715Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Step-0-SSH-遠端連線問題"><a href="#Step-0-SSH-遠端連線問題" class="headerlink" title="Step.0 SSH 遠端連線問題"></a>Step.0 SSH 遠端連線問題</h1><ol><li>建立 SSH keygen</li><li>設定公鑰授權<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 產生 SSH 公私鑰</span></span><br><span class="line">$ ssh-keygen -t rsa</span><br><span class="line"><span class="comment"># ssh 連線指令</span></span><br><span class="line">$ ssh 帳號@ip位置</span><br></pre></td></tr></table></figure></li></ol><hr><h1 id="Step-1-處理使用者權限問題"><a href="#Step-1-處理使用者權限問題" class="headerlink" title="Step.1 處理使用者權限問題"></a>Step.1 處理使用者權限問題</h1><ol><li>創建使用者</li><li>把使用者加入群組</li><li>讓該群組使用者不用輸入密碼就可 sudo<br>a. 透過指令 <code>sudo visudo</code> 進入設定檔並加入下列設定<br> <code>%wheel  ALL=(ALL)       ALL</code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 創建使用者並指定群組 (wheel)</span></span><br><span class="line">$ useradd 使用者 -G wheel</span><br><span class="line"><span class="comment"># 修改已存在使用者群組</span></span><br><span class="line">$ sudo usermod -a -G wheel 使用者</span><br></pre></td></tr></table></figure></li></ol><hr><h1 id="Step-2-安裝編譯-Ruby-相關套件"><a href="#Step-2-安裝編譯-Ruby-相關套件" class="headerlink" title="Step.2 安裝編譯 Ruby 相關套件"></a>Step.2 安裝編譯 Ruby 相關套件</h1><ol><li><p>透過指令安裝編譯所需套件</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum install -y gcc bzip2 openssl-devel libyaml-devel libffi-devel readline-devel zlib-devel gdbm-devel ncurses-devel</span><br></pre></td></tr></table></figure></li><li><p>到官網下載 Ruby 檔</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 wget (wwwget)指令下載檔案, 如果沒裝 wget 可以用 yum install wget 安裝.</span></span><br><span class="line">$ wget https://cache.ruby-lang.org/pub/ruby/2.6/ruby-2.6.1.tar.gz</span><br></pre></td></tr></table></figure></li><li><p>解壓縮檔案</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># tar 是解壓縮指令, -z(使用 Gzip 壓縮格式), -x(解壓縮), -v(顯示檔案內容 ), -f(指定檔案)</span><br><span class="line">$ tar -zxvf ruby-2.6.1.tar.gz</span><br></pre></td></tr></table></figure></li><li><p>編譯 Ruby<br>Ruby 預設會安裝到 <code>/usr/local</code> 的位置, 執行 <code>configure</code> 這個檔案來對 Ruby 編譯時的行為做設定。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./configure --prefix=/usr/<span class="built_in">local</span>/ruby-2.6.1pro.d</span><br></pre></td></tr></table></figure><p>進入 Ruby 資料夾下後,使用指令 <code>$ make</code> 編譯 Ruby, 再使用 <code>$ make install</code> 把 Ruby 順利安裝。</p></li><li><p>手動執行確認 Ruby 版本</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ /usr/<span class="built_in">local</span>/ruby-2.6.1/bin/ruby -v</span><br></pre></td></tr></table></figure></li><li><p>透過環境設定簡化操作檔案</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">export</span> PATH=/usr/<span class="built_in">local</span>/ruby-2.6.1/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure></li><li><p>新增新增 shell script 設定檔讓系統自動優先尋找指定版本 Ruby</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vi /etc/profile.d/ruby.sh</span><br><span class="line"><span class="comment"># 新增下列設定</span></span><br><span class="line"><span class="built_in">export</span> PATH=/usr/<span class="built_in">local</span>/ruby-2.6.1/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure></li></ol><hr><h1 id="Step-3-安裝-Passenger-Nginx"><a href="#Step-3-安裝-Passenger-Nginx" class="headerlink" title="Step.3 安裝 Passenger-Nginx"></a>Step.3 安裝 Passenger-Nginx</h1><ol><li>至官方下載 Passenger tarball 然後解壓縮至 <code>usr/local/passenger</code> 底下</li><li><p>進入 Passenger 目錄底下後，導出目錄路徑並執行 Pasenger-Nginx 安裝</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">export</span> PATH=/usr/<span class="built_in">local</span>/passenger/passenger-6.0.1/bin:<span class="variable">$PATH</span> (當前最新版本為 6.0.1)</span><br><span class="line">$ passenger-install-nginx-module</span><br></pre></td></tr></table></figure></li><li><p>跟隨安裝引導接續安裝缺失套件 rake, C++ …</p></li></ol><hr><h1 id="Step-4-啟動-Nginx"><a href="#Step-4-啟動-Nginx" class="headerlink" title="Step.4 啟動 Nginx"></a>Step.4 啟動 Nginx</h1><ol><li>使用指令 <code>systemctl</code> 觀看狀態和重新啟動服務。</li><li>撰寫設定檔來啟動或關閉 Nginx <a href="https://www.nginx.com/resources/wiki/start/topics/examples/systemd/" target="_blank" rel="noopener">官方範例檔</a></li><li><p>參考範例進行設定</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi /lib/systemd/system/nginx.service</span><br></pre></td></tr></table></figure></li><li><p>透過指令開機時自動啟動服務 (enable)</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> nginx</span><br></pre></td></tr></table></figure></li></ol>]]></content>
+    <title>使用 rbenv 管理 ruby 版本</title>
+    <link href="https://blog.raiden.me/2019/02/18/manage-ruby-versions-with-rbenv/"/>
+    <id>https://blog.raiden.me/2019/02/18/manage-ruby-versions-with-rbenv/</id>
+    <published>2019-02-18T07:37:07.000Z</published>
+    <updated>2019-02-18T09:09:17.965Z</updated>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;Step-0-SSH-遠端連線問題&quot;&gt;&lt;a href=&quot;#Step-0-SSH-遠端連線問題&quot; class=&quot;headerlink&quot; title=&quot;Step.0 SSH 遠端連線問題&quot;&gt;&lt;/a&gt;Step.0 SSH 遠端連線問題&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;建立 SSH keygen&lt;/li&gt;
-&lt;li&gt;設定公鑰授權&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# 產生 SSH 公私鑰&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ ssh-keygen -t rsa&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# ssh 連線指令&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ ssh 帳號@ip位置&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h1 id=&quot;Step-1-處理使用者權限問題&quot;&gt;&lt;a href=&quot;#Step-1-處理使用者權限問題&quot; class=&quot;headerlink&quot; title=&quot;Step.1 處理使用者權限問題&quot;&gt;&lt;/a&gt;Step.1 處理使用者權限問題&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;創建使用者&lt;/li&gt;
-&lt;li&gt;把使用者加入群組&lt;/li&gt;
-&lt;li&gt;讓該群組使用者不用輸入密碼就可 sudo&lt;br&gt;a. 透過指令 &lt;code&gt;sudo visudo&lt;/code&gt; 進入設定檔並加入下列設定&lt;br&gt; &lt;code&gt;%wheel  ALL=(ALL)       ALL&lt;/code&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# 創建使用者並指定群組 (wheel)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ useradd 使用者 -G wheel&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# 修改已存在使用者群組&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ sudo usermod -a -G wheel 使用者&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h1 id=&quot;Step-2-安裝編譯-Ruby-相關套件&quot;&gt;&lt;a href=&quot;#Step-2-安裝編譯-Ruby-相關套件&quot; class=&quot;headerlink&quot; title=&quot;Step.2 安裝編譯 Ruby 相關套件&quot;&gt;&lt;/a&gt;Step.2 安裝編譯 Ruby 相關套件&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;透過指令安裝編譯所需套件&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ sudo yum install -y gcc bzip2 openssl-devel libyaml-devel libffi-devel readline-devel zlib-devel gdbm-devel ncurses-devel&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;到官網下載 Ruby 檔&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# 使用 wget (wwwget)指令下載檔案, 如果沒裝 wget 可以用 yum install wget 安裝.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ wget https://cache.ruby-lang.org/pub/ruby/2.6/ruby-2.6.1.tar.gz&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;解壓縮檔案&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;# tar 是解壓縮指令, -z(使用 Gzip 壓縮格式), -x(解壓縮), -v(顯示檔案內容 ), -f(指定檔案)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ tar -zxvf ruby-2.6.1.tar.gz&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;編譯 Ruby&lt;br&gt;Ruby 預設會安裝到 &lt;code&gt;/usr/local&lt;/code&gt; 的位置, 執行 &lt;code&gt;configure&lt;/code&gt; 這個檔案來對 Ruby 編譯時的行為做設定。&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ ./configure --prefix=/usr/&lt;span class=&quot;built_in&quot;&gt;local&lt;/span&gt;/ruby-2.6.1pro.d&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;進入 Ruby 資料夾下後,使用指令 &lt;code&gt;$ make&lt;/code&gt; 編譯 Ruby, 再使用 &lt;code&gt;$ make install&lt;/code&gt; 把 Ruby 順利安裝。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;手動執行確認 Ruby 版本&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ /usr/&lt;span class=&quot;built_in&quot;&gt;local&lt;/span&gt;/ruby-2.6.1/bin/ruby -v&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;透過環境設定簡化操作檔案&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ &lt;span class=&quot;built_in&quot;&gt;export&lt;/span&gt; PATH=/usr/&lt;span class=&quot;built_in&quot;&gt;local&lt;/span&gt;/ruby-2.6.1/bin:&lt;span class=&quot;variable&quot;&gt;$PATH&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;新增新增 shell script 設定檔讓系統自動優先尋找指定版本 Ruby&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ sudo vi /etc/profile.d/ruby.sh&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# 新增下列設定&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;export&lt;/span&gt; PATH=/usr/&lt;span class=&quot;built_in&quot;&gt;local&lt;/span&gt;/ruby-2.6.1/bin:&lt;span class=&quot;variable&quot;&gt;$PATH&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h1 id=&quot;Step-3-安裝-Passenger-Nginx&quot;&gt;&lt;a href=&quot;#Step-3-安裝-Passenger-Nginx&quot; class=&quot;headerlink&quot; title=&quot;Step.3 安裝 Passenger-Nginx&quot;&gt;&lt;/a&gt;Step.3 安裝 Passenger-Nginx&lt;/h1&gt;
-    
     </summary>
     
-      <category term="DevOps" scheme="https://blog.raiden.me/categories/DevOps/"/>
+      <category term="Ruby On Rails 菜鳥的逆襲" scheme="https://blog.raiden.me/categories/Ruby-On-Rails-%E8%8F%9C%E9%B3%A5%E7%9A%84%E9%80%86%E8%A5%B2/"/>
     
-    
-      <category term="DevOps" scheme="https://blog.raiden.me/tags/DevOps/"/>
     
       <category term="Ruby On Rails" scheme="https://blog.raiden.me/tags/Ruby-On-Rails/"/>
     
-      <category term="Deploy" scheme="https://blog.raiden.me/tags/Deploy/"/>
+      <category term="Developer Tools" scheme="https://blog.raiden.me/tags/Developer-Tools/"/>
     
   </entry>
   
