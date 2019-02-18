@@ -20,7 +20,7 @@
 {% endif %}
 
 {% if config.bing_site_verification %}
-<meta name="msvalidate.01" content="{{ config.bing_site_verification }}" />
+  <meta name="msvalidate.01" content="{{ config.bing_site_verification }}" />
 {% endif %}
 
 <!-- CSS -->
@@ -34,3 +34,6 @@
 
 <!-- 统计 -->
 {% include './analytics.swig' %}
+
+<!-- 為圖片加入 og 協議 -->
+{% include './open_graph.swig' %}
