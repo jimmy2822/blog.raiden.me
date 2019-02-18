@@ -13,6 +13,7 @@ author:
   link: https://github.com/jimmy2822
 language: zh-tw
 timezone: Asia/Taipei
+fb_app_id: 2191740657808537
 
 # blog favicon 圖標 location: themes/hexo-theme-skapp/source/img
 favicon_ico: /img/logo.png

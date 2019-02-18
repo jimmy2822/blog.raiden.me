@@ -37,3 +37,6 @@
 
 <!-- 為圖片加入 og 協議 -->
 {% include './open_graph.swig' %}
+
+<!-- 加入 FB SDK -->
+{% include './fb_sdk.swig' %}
