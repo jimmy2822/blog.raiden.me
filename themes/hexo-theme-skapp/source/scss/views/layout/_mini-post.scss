@@ -111,9 +111,7 @@ body {
     font-size: $main-fs + 4px;
     margin: 0;
     font-weight: 400;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    word-wrap:break-word;
 
     & > a {
         @include link($main-color);
