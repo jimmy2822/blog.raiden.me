@@ -1,8 +1,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
 <meta name="format-detection" content="telephone=no">
-<meta name="author" content="{{ get_setting('author') }}" />
-<meta name="keywords" content="{{ get_setting('keywords') }}"/>
+<meta name="author" content="{{ get_setting('author') }}" /> <meta name="keywords" content="{{ get_setting('keywords') }}"/>
 <meta name="description" content="{{ get_setting('description') }}" />
 
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -40,3 +39,6 @@
 
 <!-- 加入 FB SDK -->
 {% include './fb_sdk.swig' %}
+
+<!-- 使用 google prettify 美化 codeblock -->
+{% include './prettify.swig' %}

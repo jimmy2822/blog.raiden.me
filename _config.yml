@@ -130,3 +130,6 @@ feed:
 # Sitemap
 sitemap:
   path: sitemap.xml
+
+# Google Prettify
+  custom_highlight_theme: desert
