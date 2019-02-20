@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.raiden.me/"/>
-  <updated>2019-02-18T09:09:17.965Z</updated>
+  <updated>2019-02-19T02:37:13.687Z</updated>
   <id>https://blog.raiden.me/</id>
   
   <author>
@@ -21,9 +21,18 @@
     <link href="https://blog.raiden.me/2019/02/18/manage-ruby-versions-with-rbenv/"/>
     <id>https://blog.raiden.me/2019/02/18/manage-ruby-versions-with-rbenv/</id>
     <published>2019-02-18T07:37:07.000Z</published>
-    <updated>2019-02-18T09:09:17.965Z</updated>
+    <updated>2019-02-19T02:37:13.687Z</updated>
+    
+    <content type="html"><![CDATA[<pre><code class="ruby">def jimmy(name, age)  @name = person  @age = ageend</code></pre>]]></content>
     
     <summary type="html">
+    
+      &lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;def jimmy(name, age)
+  @name = person
+  @age = age
+end
+&lt;/code&gt;&lt;/pre&gt;
+
     
     </summary>
     
