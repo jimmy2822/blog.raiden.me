@@ -41,18 +41,9 @@
                     {% endfor %}
                 </ul>
             </div>
-
-            {% if config.busuanzi %}
-            <div class="mark__block">
-                <i class="mark__icon iconfont icon-eye"></i>
-                <ul class="mark__list clearfix">
-                    <li id="busuanzi_container_page_pv" class="mark__item"><span id="busuanzi_value_page_pv"></span>{{ __('other.bout') }}</li>
-                </ul>
-            </div>
-            {% endif %}
         </div>
+    <hr>
     </header>
-
     <div class="post__content">
         {{ render(page.content) }}
 

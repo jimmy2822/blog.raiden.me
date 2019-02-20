@@ -8,3 +8,10 @@ cover: /2019/02/18/manage-ruby-versions-with-rbenv/cover.jpg
 categories: Ruby On Rails 菜鳥的逆襲
 tags: [Ruby On Rails, Developer Tools]
 ---
+
+```ruby
+def jimmy(name, age)
+  @name = person
+  @age = age
+end
+```

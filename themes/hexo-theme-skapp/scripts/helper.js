@@ -5,7 +5,7 @@ const
     Util = require('util'),
     _ = require('lodash');
 
-const 
+const
     publicDir   = hexo.public_dir,
     sourceDir   = hexo.source_dir;
 
@@ -16,7 +16,7 @@ hexo.extend.helper.register('blog_archives', function(posts) {
     posts.data.forEach(post => {
         if (post.draft) return;
 
-        let 
+        let
             year = this.date(post.date, 'YYYY'),
             archiveIndex = archives.findIndex(archive => year === archive.year),
             archive;
@@ -38,7 +38,7 @@ hexo.extend.helper.register('blog_archives', function(posts) {
     archives.forEach((archive, idx) => {
         archive.posts = archive.posts.sort((first, next) => getTime(next.date) - getTime(first.date));
     });
-    
+
     return archives;
 });
 
@@ -51,10 +51,10 @@ hexo.extend.helper.register('blog_archive_menu', function(page) {
     posts.data.forEach(post => {
         if (post.draft) return;
 
-        let 
+        let
             year = this.date(post.date, 'YYYY'),
             menuIndex = menu.findIndex(item => year === item);
-        
+
         if (!~menuIndex) {
             menu.push(year);
         }
@@ -89,7 +89,7 @@ hexo.extend.helper.register('blog_archive_menu', function(page) {
     return `
         <nav class="mb-main__nav">
             ${menuHtml}
-        </nav> 
+        </nav>
     `;
 });
 
@@ -138,7 +138,7 @@ hexo.extend.helper.register('archive_index_paginator', function(size = 2) {
     function fixLink(link = '') {
         let linkArr = link.split('/');
         let archiveDirIdx = linkArr.findIndex(item => archiveDir === item);
-        
+
         if (linkArr[archiveDirIdx + 1] == paginationDir) {
             linkArr.splice(archiveDirIdx, 0, label);
         }
@@ -196,7 +196,7 @@ hexo.extend.helper.register('archive_index_paginator', function(size = 2) {
 });
 
 hexo.extend.helper.register('num_toArray', function(num) {
-    let 
+    let
         ret = [],
         idx = 1;
 
@@ -204,7 +204,7 @@ hexo.extend.helper.register('num_toArray', function(num) {
         ret.push(idx);
         idx ++;
     }
-    
+
     return ret;
 });
 
@@ -221,7 +221,7 @@ hexo.extend.helper.register('tags', function() {
                 return p + `
                     <li class="tag-item">
                         <a class="tag-link" href="${ this.url_for(item.path) }">${ item.name }</a>
-                    </li>  
+                    </li>
                 `;
             }, '') }
         </ul>

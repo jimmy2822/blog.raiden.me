@@ -40,5 +40,9 @@
 <!-- 加入 FB SDK -->
 {% include './fb_sdk.swig' %}
 
+<!-- 使用 jQuery -->
+<script src= '/js/libs/jquery.min.js'></script>
+
 <!-- 使用 google prettify 美化 codeblock -->
 {% include './prettify.swig' %}
+
