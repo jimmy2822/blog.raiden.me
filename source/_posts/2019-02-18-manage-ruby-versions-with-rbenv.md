@@ -9,9 +9,4 @@ categories: Ruby On Rails 菜鳥的逆襲
 tags: [Ruby On Rails, Developer Tools]
 ---
 
-```ruby
-def jimmy(name, age)
-  @name = person
-  @age = age
-end
-```
+內容撰寫中...

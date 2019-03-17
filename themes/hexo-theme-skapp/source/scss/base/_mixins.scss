@@ -73,7 +73,10 @@
     }
 
     ul, ol, dl {
-        padding-left: 1.5em;
+        padding-left: 2.5em;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        word-spacing: .3em;
     }
 
     blockquote {
@@ -92,7 +95,6 @@
         &:hover,
         &:active {
             color: $main-color--hover;
-            text-decoration: underline;
         }
     }
 
@@ -184,6 +186,14 @@
         }
     }
 
+    p code {
+      color: #1758aa;
+    }
+
+    p a {
+      color: #ce2727;
+    }
+
     code {
         padding: 0 .4em;
         margin: 0;
@@ -201,7 +211,7 @@
 
     img {
         max-width: 100%;
-        
+
         &:not(:last-child) {
             margin-bottom: 10px;
         }

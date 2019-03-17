@@ -132,4 +132,4 @@ sitemap:
   path: sitemap.xml
 
 # Google Prettify
-custom_highlight_theme: tomorrow-night-eighties
+custom_highlight_theme: tranquil-heart
