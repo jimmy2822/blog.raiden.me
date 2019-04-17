@@ -8,16 +8,18 @@ cover: /2019/02/18/manage-ruby-versions-with-rbenv/cover.jpg
 categories: Ruby On Rails 菜鳥的逆襲
 tags: [Ruby On Rails, Developer Tools]
 ---
-
 # 關於菜鳥的逆襲
+---
 想撰寫此系列文章的動機在於筆者剛開始學習 `Ruby On Rails` 的過程中，由於對程式背景相關知識的不足，導致產生大量撞牆時間。在頭破血流的過程中，將盡量紀錄對於新手時期可能會遇到的問題與解法，期望能幫助到有緣人在學習 `Ruby On Rails` 路上避開可能會踩到的各種坑。
 
 # 為什麼需要 rbenv ?
+---
 `rbenv` 是一種版本控管工具，被用來安裝與管理你所使用的 `Ruby` 版本。為什麼需要管理 `Ruby` 版本呢？
 
 由於一般在使用 `Ruby On Rails` 開發專案的過程中，你將有很高的機率面臨需要切換不同版本 `Ruby` 的情境，因為每個專案可能使用的 `Ruby` 版本都不盡相同，且專案中所使用的 `Gem` 也是基於某個 `Ruby` 版本下去寫的，這導致了有些你想用的 `Gem` 可能只支援某個版本以前或以後的 `Ruby`，而你想用這些 `Gem` 就必須搭配支援的 `Ruby` 版本。所以學會使 `Ruby` 版本控管工具來切換不同的 `Ruby` 版本就顯得很重要。
 
 # 安裝 rbenv
+---
 由於筆者所使用的作業系統是 `macOS`，所以我們將介紹如何在 `Mac` 的環境下透過 `Homebrew` 安裝 `rbenv`。如果你所使用的作業系統是 `Windows` 可以參考 [這裡](https://docs.brew.sh/Homebrew-on-Linux)。
 
 ## 安裝 Homebrew
@@ -62,6 +64,7 @@ echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.zshrc
 指令執行完畢後你可以選擇關閉現在的終端機視窗，再開啟一個全新的終端機視窗，此時你應開會發現在終端機中輸入 `rbenv` 可以正常作用了。
 
 # 基本的 rbenv 指令
+---
 ## 透過 rbenv 安裝 Ruby
 ```bash
 rbenv install -l
@@ -84,4 +87,5 @@ rbenv local 版本號碼
 這兩個指令的差別在於帶有 `local` 的指令通常在專案的目錄底下執行，因為指令執行後會在該專案的目錄下留下一個隱藏檔案來記錄當我們在這個目錄中所使用的 Ruby 版號，且僅在這個目錄下有效。如果你是在其他的地方使用 Ruby 那我們所使用的版本就會是帶有 `global` 指令所設定的 Ruby 版本。
 
 # 小結
+---
 在進行撰寫程式碼之前的課題就是建置環境，當時因為對 Linux 連最基礎的知識都沒有所以在這邊卡了非常久，希望這篇文章的分享有機會幫助到和我一樣缺乏 Linux 基礎背景知識又卡關的苦主，希望大家日後都可以順利的完成開發環境建置工作喔！

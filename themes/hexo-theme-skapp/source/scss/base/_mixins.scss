@@ -23,23 +23,23 @@
     overflow-wrap: break-word;
 
     h1 {
-        font-size: 2em;
+        font-size: 2.3em;
     }
 
     h2 {
-        font-size: 1.8em;
+        font-size: 1.7em;
     }
 
     h3 {
-        font-size: 1.6em;
-    }
-
-    h4 {
         font-size: 1.4em;
     }
 
+    h4 {
+        font-size: 1.1em;
+    }
+
     h5 {
-        font-size: 1.2em;
+        font-size: 1em;
     }
 
     h6 {
@@ -59,10 +59,6 @@
         margin: 0;
         outline: none;
         border: 0;
-
-        &:not(:last-child) {
-            margin-bottom: $main-fs * 1.5;
-        }
     }
 
     h1, h2, h3, h4, h5, h6 {
@@ -70,12 +66,13 @@
         font-weight: 400;
         color: $title-fc;
         margin-top: $main-fs * 2.5;
+        margin-bottom: $main-fs * 1.5;
     }
 
     ul, ol, dl {
         padding-left: 2.5em;
-        padding-top: 1em;
-        padding-bottom: 1em;
+        padding-top: .5em;
+        padding-bottom: .5em;
         word-spacing: .3em;
     }
 
@@ -236,5 +233,9 @@
         tbody > tr:nth-child(2n+1)>td {
             background-color: rgba(102,128,153,.05);
         }
+    }
+
+    p {
+      margin: 15px 0px;
     }
 }

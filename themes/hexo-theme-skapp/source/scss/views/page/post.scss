@@ -14,12 +14,9 @@ body {
 }
 
 .post__cover {
-    width: 100%;
-
     & > img {
         display: block;
-        max-width: 930px;
-        max-height: 465px;
+        width: 100%;
     }
 }
 
