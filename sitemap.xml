@@ -2,16 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://blog.raiden.me/2019/02/18/manage-ruby-versions-with-rbenv/</loc>
+    <loc>https://blog.raiden.me/2019/08/24/object-oriented-in-ruby/</loc>
     
-    <lastmod>2019-04-16T13:11:37.123Z</lastmod>
+    <lastmod>2019-08-21T07:08:47.905Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://blog.raiden.me/2019/03/16/make-your-discord-chatbot-with-ruby/</loc>
     
-    <lastmod>2019-03-17T09:45:43.059Z</lastmod>
+    <lastmod>2019-08-21T06:38:01.987Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.raiden.me/2019/02/18/manage-ruby-versions-with-rbenv/</loc>
+    
+    <lastmod>2019-08-21T06:38:01.975Z</lastmod>
     
   </url>
   
