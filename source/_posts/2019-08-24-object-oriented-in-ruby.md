@@ -235,5 +235,3 @@ end
 讓我們謹記心，打造更棒的世界！
 
 [演講投影片](https://speakerdeck.com/c9s/virtual-machines)
-
-本文同步發表於 [硬底居米 Indie Jimmy](https://blog.raiden.me/)
