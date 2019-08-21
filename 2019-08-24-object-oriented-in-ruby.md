@@ -1,5 +1,5 @@
 ---
-title: basic-object-oriented-in-ruby
+title: 想找到脫離新手村的方向？ 讓 Ruby 中的物件導向基礎為你引路！
 author:
   nick: 居米
   link: 'https://github.com/jimmy2822'
@@ -8,7 +8,7 @@ D: '2019-08-24'
 date: 2019-08-21 14:23:01
 cover: /2019/08/24/object-oriented-in-ruby/cover.jpg
 categories: Ruby On Rails 菜鳥的逆襲
-tags: [Ruby, Object-Oriented]
+tags: [Ruby, Object-Oriented, 物件導向]
 ---
 
 還記得一開始自學程式語言時，大家一定或多或少都聽過一個名詞 `物件導向`。然後身為程式新手和非程式相關科系畢業的你也許會開始 Google 它到底是什麼意思，然後你會在 [維基百科](https://zh.wikipedia.org/wiki/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1) 上查到諸如此類的解釋：
