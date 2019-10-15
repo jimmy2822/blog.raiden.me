@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.raiden.me/2019/10/15/design-pattern-decorator/</loc>
+    
+    <lastmod>2019-10-15T03:19:06.643Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.raiden.me/2019/08/24/object-oriented-in-ruby/</loc>
     
     <lastmod>2019-08-21T15:31:45.142Z</lastmod>

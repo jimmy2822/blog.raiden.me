@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.raiden.me/"/>
-  <updated>2019-08-21T15:31:45.142Z</updated>
+  <updated>2019-10-15T03:19:06.643Z</updated>
   <id>https://blog.raiden.me/</id>
   
   <author>
@@ -15,6 +15,56 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Ruby 中的設計模式－裝飾模式 Decorator</title>
+    <link href="https://blog.raiden.me/2019/10/15/design-pattern-decorator/"/>
+    <id>https://blog.raiden.me/2019/10/15/design-pattern-decorator/</id>
+    <published>2019-10-14T16:00:00.000Z</published>
+    <updated>2019-10-15T03:19:06.643Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><hr><ul><li>裝飾模式允許我們在沒有影響同類的物件下對物件改變其行為</li><li>裝飾模式是替代創建子類別的好方法</li></ul><h2 id="情境探討"><a href="#情境探討" class="headerlink" title="情境探討"></a>情境探討</h2><hr><p>假設我們有一台車的商品，售價為一百。</p><pre><code class="ruby">class Car  def price    100  endendcar = Car.newputs car.price</code></pre><p>我們現在需要為車子新增零件。</p><pre><code class="ruby">class CarWithLight &lt; Car  def price    120  endend</code></pre><p>現在有一台跑車掛滿零件，很貴。</p><pre><code class="ruby">class SportCar &lt; Car  def price    250  endend</code></pre><p>現在我們因為車子多加零件所以要變更價格，但是我們花了許多 class 去做這件事情。如果還有更多種類的車子，我們會遇上更多麻煩。</p><p>如果我們考慮用動態的 module 去延伸呢？</p><h2 id="Extending-dynamically-with-modules"><a href="#Extending-dynamically-with-modules" class="headerlink" title="Extending dynamically with modules"></a>Extending dynamically with modules</h2><hr><p>為了簡化我們的程式碼，我們使用模組動態新增行為到車子上。讓我們把新的車子零件改寫為模組。</p><pre><code class="ruby">module CarWithLight  def price    super + 20  endendmodule SportCar  def price    super + 150  endend</code></pre><p>現在我們用 Ruby 的方法 <code>extend</code> 將原本的 <code>Car</code> 做延伸。</p><pre><code class="ruby">car = Car.new               =&gt; # price = 100car.extend(CarWithLight)    =&gt; # price = 120car.extend(SportCar)        =&gt; # price = 270</code></pre><p>在使用 module 的方式下，我們不必再新增多餘的子類別去繼承 <code>Car</code>，寫法上又比繼承的方式簡潔不少。</p><p>但是隨著 module 化後，如先前舉例我們使用 <code>extend</code> 來獲得不同車種零件的價格加乘。但是接著我們會發現我們想要對同一個物件的價格加乘兩次時，<code>module</code> 不允許我們這麼做。</p><pre><code class="ruby">car = Car.new               =&gt; # price = 100car.extend(CarWithLight)    =&gt; # price = 120car.extend(CarWithLight)    =&gt; # price = 120</code></pre><p>如上範例程式碼，當我們對同一個物件 <code>extend</code> 兩次，會發現第二次的執行不會對車子價格產生影響。這是因為 <code>extend</code> 在 Ruby 中實作機制不允許我們這樣使用。是時候尋找新的方法了。</p><h2 id="使用-Decorator-Pattern"><a href="#使用-Decorator-Pattern" class="headerlink" title="使用 Decorator Pattern"></a>使用 Decorator Pattern</h2><hr><p>如果我們想要對車子添加更多零件，我們可以把車子的零件以 <code>Decorator Object</code> 的形式實作它。</p><pre><code class="ruby">class Car  def price    100  endendclass AddCarPart  def initialize(car)    @car = car  end  def price    @car.price + 25  endendcar =  Car.newnormal_car = AddCarPart.new(car)sport_car = AddCarPart.new(normal_car)puts car.price          # =&gt; 100puts normal_car.price   # =&gt; 125puts sport_car.price    # =&gt; 150</code></pre><p>當我們使用 Decorator Object 時，我們期待這個 Object 會傳入 <code>Car</code> 類別進來，並且對該類別的實體進行價格的增減。這樣的使用情境下就會符合我們預期中的行為，也可以解決 <code>Module</code> 被多次 <code>extend</code> 導致無法正常作用的窘境。</p><h2 id="Delegate-委派"><a href="#Delegate-委派" class="headerlink" title="Delegate 委派"></a>Delegate 委派</h2><hr><p>當我們的裝飾物件類別的實體需要新增一個實例方法時，我們會遇上一些麻煩。例如先前範例中的 <code>Car</code> 類別，如果 <code>Car</code> 新增一個 <code>#turbo</code> 方法呢？已經透過裝飾物件 <code>AddCarPart</code> 變更行為的實體便不會擁有新的方法 <code>#turbo</code> 了。像這樣的情境我們可以使用委派（Delegate）的方式來解決像這樣的問題。範例如下：</p><pre><code class="ruby">class Car  def price    100  endendclass CarDelegator  def info    puts price  endendclass AddCarPart &lt; CarDelegator  def initialize(car)    @car = car  end  def price    @car.price + 25  endendcar =  Car.newnormal_car = AddCarPart.new(car)sport_car = AddCarPart.new(normal_car)normal_car.info   # =&gt; 125sport_car.info    # =&gt; 150</code></pre><p>我們在這段範例中為 <code>Car</code> 類別實作了一個 <code>Delegator</code>，並且將 <code>AddCarPart</code> 繼承它。如此一來，我們在委派的類別中成功為所有需要通過裝飾類別的物件統一加入某個方法。假設在該裝飾物件中，同樣的方法想要有不同的行為，我們也可以覆寫它並保有彈性。</p><h2 id="關於學習設計模式"><a href="#關於學習設計模式" class="headerlink" title="關於學習設計模式"></a>關於學習設計模式</h2><hr><p>所謂的設計模式（Design Pattern）是一種經驗法則的產物。在各種程式語言中幾乎都可以利用語言的特性去實作設計模式。為什麼我們要學習設計模式呢？因為前人所累積的智慧，在應對特定的情境上找出常用的解法。這樣一來新進的工程師在面臨結構相似的問題時，就可以參考各種設計模式並瞭解其中的優劣，進而幫助自己釐清問題的本質。</p><p>這是部落格第一篇描寫關於設計模式的文章，聽說設計模式一共有二十來種呢⋯⋯期待在接下來的文章分享中，我們能繼續探索並分享設計模式的學習心得。一起邁向偉大的航道吧！（充滿臭蟲的海域？</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h2&gt;&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;裝飾模式允許我們在沒有影響同類的物件下對物件改變其行為&lt;/li&gt;
+&lt;li&gt;裝飾模式是替代創建子類別的好方法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;情境探討&quot;&gt;&lt;a href=&quot;#情境探討&quot; class=&quot;headerlink&quot; title=&quot;情境探討&quot;&gt;&lt;/a&gt;情境探討&lt;/h2&gt;&lt;hr&gt;
+&lt;p&gt;假設我們有一台車的商品，售價為一百。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;class Car
+  def price
+    100
+  end
+end
+
+car = Car.new
+
+puts car.price
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;我們現在需要為車子新增零件。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;class CarWithLight &amp;lt; Car
+  def price
+    120
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;現在有一台跑車掛滿零件，很貴。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Ruby Design Pattern 設計模式" scheme="https://blog.raiden.me/categories/Ruby-Design-Pattern-%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+      <category term="Ruby" scheme="https://blog.raiden.me/tags/Ruby/"/>
+    
+      <category term="Object-Oriented" scheme="https://blog.raiden.me/tags/Object-Oriented/"/>
+    
+      <category term="Design-Pattern" scheme="https://blog.raiden.me/tags/Design-Pattern/"/>
+    
+  </entry>
   
   <entry>
     <title>想找到脫離新手村的方向？ 讓 Ruby 中的物件導向基礎為你引路！</title>
