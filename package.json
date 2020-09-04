@@ -28,7 +28,7 @@
     "jquery": "^3.4.1",
     "lunr": "github:mamboer/lunr.js",
     "moment": "^2.24.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "object-assign": "^4.1.1"
   }
 }
