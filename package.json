@@ -6,7 +6,7 @@
     "version": "3.9.0"
   },
   "dependencies": {
-    "ajv": "^5.5.2",
+    "ajv": "^6.12.3",
     "hexo": "^3.9.0",
     "hexo-autoprefixer": "^2.0.0",
     "hexo-deployer-git": "^1.0.0",
