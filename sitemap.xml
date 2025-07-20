@@ -95,6 +95,13 @@
   </url>
   
   <url>
+    <loc>https://blog.raiden.me/tags/Chatbot/</loc>
+    <lastmod>2025-07-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.raiden.me/tags/Object-Oriented/</loc>
     <lastmod>2025-07-20</lastmod>
     <changefreq>weekly</changefreq>
@@ -109,7 +116,7 @@
   </url>
   
   <url>
-    <loc>https://blog.raiden.me/tags/Chatbot/</loc>
+    <loc>https://blog.raiden.me/tags/Design-Pattern/</loc>
     <lastmod>2025-07-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -143,13 +150,6 @@
     <priority>0.2</priority>
   </url>
   
-  <url>
-    <loc>https://blog.raiden.me/tags/Design-Pattern/</loc>
-    <lastmod>2025-07-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
 
   
   <url>
@@ -167,14 +167,14 @@
   </url>
   
   <url>
-    <loc>https://blog.raiden.me/categories/%E6%B2%99%E7%99%BC%E4%B8%8A%E7%9A%84%E5%B1%85%E7%B1%B3/</loc>
+    <loc>https://blog.raiden.me/categories/Ruby-Design-Pattern-%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/</loc>
     <lastmod>2025-07-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.raiden.me/categories/Ruby-Design-Pattern-%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/</loc>
+    <loc>https://blog.raiden.me/categories/%E6%B2%99%E7%99%BC%E4%B8%8A%E7%9A%84%E5%B1%85%E7%B1%B3/</loc>
     <lastmod>2025-07-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
