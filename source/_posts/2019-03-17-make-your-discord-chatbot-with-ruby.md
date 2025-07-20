@@ -3,8 +3,8 @@ title: 使用 Ruby 製作屬於你的 Discord 聊天機器人
 author:
   nick: 居米
   link: 'https://github.com/jimmy2822'
-date: 2019-03-16 15:52:05
-cover: /2019/03/16/make-your-discord-chatbot-with-ruby/cover.jpg
+date: 2019-03-17 15:52:05
+cover: /2019/03/17/make-your-discord-chatbot-with-ruby/cover.jpg
 categories: 怪奇專案集散地
 tags: [Ruby, Chatbot]
 ---

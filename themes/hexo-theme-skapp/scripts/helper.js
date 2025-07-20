@@ -2,8 +2,7 @@
 
 const
     Path = require('path'),
-    Util = require('util'),
-    _ = require('lodash');
+    Util = require('util');
 
 const
     publicDir   = hexo.public_dir,

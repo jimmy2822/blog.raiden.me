@@ -12,8 +12,8 @@ math:
 
   # hexo-rendering-pandoc (or hexo-renderer-kramed) needed to full MathJax support.
   mathjax:
-    # Use 2.7.1 as default, jsdelivr as default CDN, works everywhere even in China
-    cdn: //cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+    # Updated to MathJax v3 for better performance and security
+    cdn: //cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
     # For newMathJax CDN (cdnjs.cloudflare.com) with fallback to oldMathJax (cdn.mathjax.org).
     #cdn: //cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML
     # For direct link to MathJax.js with CloudFlare CDN (cdnjs.cloudflare.com).
@@ -31,18 +31,22 @@ math:
     # Bootcss, works great in China, but not so well in other region
     #cdn: //cdn.bootcss.com/KaTeX/0.7.1/katex.min.css
   
-# Sass
+# Sass - Optimized for production
 node_sass:
-  outputStyle: nested
+  outputStyle: compressed
   precision: 5
   sourceComments: false
+  sourceMap: false
 
-# Autoprefixer
+# Autoprefixer - Updated browser support
 autoprefixer:
   exclude:
     - '*.min.css'
+    - 'prettify*.css'
   browsers:
     - 'last 2 versions'
+    - '> 1%'
+    - 'not dead'
 
 # Lunr
 lunr:
@@ -63,12 +67,15 @@ hfc_css:
   enable: true
   exclude: 
     - '*.min.css'
+    - 'prettify*.css'
 
 hfc_js:
   enable: true
   mangle: true
   exclude: 
     - '*.min.js'
+    - 'prettify*.js'
+    - 'jquery*.js'
 
 hfc_img:
   enable: false

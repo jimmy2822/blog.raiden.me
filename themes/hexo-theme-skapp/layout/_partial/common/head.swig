@@ -1,7 +1,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
 <meta name="format-detection" content="telephone=no">
-<meta name="author" content="{{ get_setting('author') }}" /> <meta name="keywords" content="{{ get_setting('keywords') }}"/>
+<meta name="author" content="{% if get_setting('author').name %}{{ get_setting('author').name }}{% else %}{{ get_setting('author') }}{% endif %}" /> <meta name="keywords" content="{{ get_setting('keywords') }}"/>
 <meta name="description" content="{{ get_setting('description') }}" />
 
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -43,6 +43,5 @@
 <!-- 使用 jQuery -->
 <script src= '/js/libs/jquery.min.js'></script>
 
-<!-- 使用 google prettify 美化 codeblock -->
-{% include './prettify.swig' %}
+<!-- Code highlighting is handled by Hexo's built-in system -->
 

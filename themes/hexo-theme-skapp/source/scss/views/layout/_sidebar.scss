@@ -18,7 +18,7 @@ $title-falg-w: 4px      !default;
             outline: none;
             color: inherit;
             border: none;
-            border-radius: $item-height / 2;
+            border-radius: calc($item-height / 2);
             appearance: none;
             background-color: rgba(164, 177, 191, 0.15);
             box-shadow: none;

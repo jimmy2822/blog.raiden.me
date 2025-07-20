@@ -5,7 +5,7 @@ $back-top-size: 50px !default;
     display: block;
     width: $back-top-size;
     height: $back-top-size;
-    font-size: $back-top-size / 2;
+    font-size: calc($back-top-size / 2);
     right: 1em;
     bottom: 3em;
     text-align: center;

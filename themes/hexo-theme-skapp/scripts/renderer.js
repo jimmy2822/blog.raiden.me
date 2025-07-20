@@ -64,14 +64,8 @@ hexo.extend.generator.register('lunr', function(locals){
         bodyText;
 
     for(var yearKey in res){
-        searchIdx = lunr(function(){
-            this.field('title', {boost:10});
-            this.field('body');
-            this.field('desc');
-            this.field('tags', {boost:5});
-            this.field('categories', {boost:5});
-            this.ref('href');
-        });
+        let documents = [];
+        
         res[yearKey].forEach(function(post){
             tags = [];
             cates = [];
@@ -91,14 +85,17 @@ hexo.extend.generator.register('lunr', function(locals){
                 });
             }
             bodyText = lunrConfig.fulltext ? post.content : post.excerpt;
-            searchIdx.add({
+            
+            let doc = {
                 title: post.title,
                 desc: post.subtitle || "",
                 body: bodyText || "",
                 tags: tags.join(','),
                 cates: cates.join(','),
                 href: '/' + post.path
-            });
+            };
+            
+            documents.push(doc);
 
             store['/' + post.path] = {
                 url: '/' + post.path,
@@ -127,6 +124,22 @@ hexo.extend.generator.register('lunr', function(locals){
                     || 'unknow'
             };
         });
+        
+        // 建立 lunr 索引
+        searchIdx = lunr(function(){
+            this.field('title', {boost:10});
+            this.field('body');
+            this.field('desc');
+            this.field('tags', {boost:5});
+            this.field('cates', {boost:5});
+            this.ref('href');
+            
+            // 添加所有文檔到索引
+            documents.forEach(function(doc) {
+                this.add(doc);
+            }, this);
+        });
+        
         finalData.push({
             path: pathFn.join(lunrPath, yearKey + ".json"),
             data: JSON.stringify({
