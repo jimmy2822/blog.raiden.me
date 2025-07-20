@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+    <meta charset="utf-8" />
+    
+        <title>使用 Ruby 製作屬於你的 Discord 聊天機器人 | 硬底居米 Indie Jimmy</title>
+    
+
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="Jimmy Wu" /> <meta name="keywords" content="ruby on rails, gamedav, game development, developer, web developer, ruby"/>
+<meta name="description" content="硬底居米的部落格，關於寫程式、遊戲、電影、音樂、閱讀..." />
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="robots" content="all" />
+
+<link rel="canonical" href="https://blog.raiden.me/2019/03/17/make-your-discord-chatbot-with-ruby/index.html">
+
+<link rel="icon" type="image/png" href="/img/logo.png" sizes="32x32">
+
+
+
+
+
+<!-- CSS -->
+
+<link rel="stylesheet" href="/scss/base/index.css">
+
+
+<!-- Prefetch -->
+
+
+
+
+
+
+<!-- RSS -->
+<link rel="alternate" href="/atom.xml" title="硬底居米的部落格 | The Blog Of Indie Jimmy" type="application/atom+xml">
+
+<!-- 统计 -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122827207-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-122827207-2');
+  </script>
+
+
+
+<!-- 為圖片加入 og 協議 -->
+<meta name="description" content="最近很火紅的第一人稱射擊吃雞類型遊戲「Apex Legends」上市8小時內同時在線玩家人數突破100萬人（筆者也是其中之一），這款遊戲和 Ruby 能擦出什麼樣的火花呢？在本文中我們將嘗試使用 Ruby 搭配玩家間熱門的語音通訊社群軟體 Discord 製作聊天機器人再透過 API 獲取玩家於遊戲中的相關戰績資訊。該透過哪些步驟快速製作我們的聊天機器人呢？讓我們接下去看看吧！ 前置作業 假設你已">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 Ruby 製作屬於你的 Discord 聊天機器人">
+<meta property="og:url" content="https://blog.raiden.me/2019/03/17/make-your-discord-chatbot-with-ruby/">
+<meta property="og:site_name" content="硬底居米的部落格 | The Blog Of Indie Jimmy">
+<meta property="og:description" content="最近很火紅的第一人稱射擊吃雞類型遊戲「Apex Legends」上市8小時內同時在線玩家人數突破100萬人（筆者也是其中之一），這款遊戲和 Ruby 能擦出什麼樣的火花呢？在本文中我們將嘗試使用 Ruby 搭配玩家間熱門的語音通訊社群軟體 Discord 製作聊天機器人再透過 API 獲取玩家於遊戲中的相關戰績資訊。該透過哪些步驟快速製作我們的聊天機器人呢？讓我們接下去看看吧！ 前置作業 假設你已">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://blog.raiden.me/2019/03/17/make-your-discord-chatbot-with-ruby/cover.jpg">
+<meta property="article:published_time" content="2019-03-17T07:52:05.000Z">
+<meta property="article:modified_time" content="2025-07-19T08:24:03.479Z">
+<meta property="article:author" content="[object Object]">
+<meta property="article:tag" content="Ruby">
+<meta property="article:tag" content="Chatbot">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.raiden.me/2019/03/17/make-your-discord-chatbot-with-ruby/cover.jpg">
+<meta property="fb:app_id" content="2191740657808537">
+
+
+<!-- 加入 FB SDK -->
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId            : 2191740657808537,
+      autoLogAppEvents : true,
+      xfbml            : true,
+      version          : 'v3.2'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+<!-- 使用 jQuery -->
+<script src= '/js/libs/jquery.min.js'></script>
+
+<!-- Code highlighting is handled by Hexo's built-in system -->
+
+
+    
+    
+    
+<link rel="stylesheet" href="/scss/views/page/post.css">
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body ontouchstart>
+    
+        <!-- loading 页面 -->
+<div id="page-loading" class="page page-loading" style="background-image: url('/img/loading.gif')"></div>
+    
+
+    <div id="page" class="page js-hidden">
+        
+    <!-- 页头 -->
+<header class="page__small-header page__header--small">
+    <nav class="page__navbar">
+        <div class="page__container navbar-container">
+            <a class="page__logo" href="/" title="硬底居米的部落格 | The Blog Of Indie Jimmy" alt="硬底居米的部落格 | The Blog Of Indie Jimmy">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0Ij48Y2lyY2xlIGN4PSI0IiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgaWQ9InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAiIGF0dHJpYnV0ZU5hbWU9InIiIGJlZ2luPSIwO3N2Z1NwaW5uZXJzM0RvdHNTY2FsZTEuZW5kLTAuMjVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNnMiIGR1cj0iMC43NXMiIHZhbHVlcz0iMzsuMjszIi8+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMjAiIGN5PSIxMiIgcj0iMyIgZmlsbD0iY3VycmVudENvbG9yIj48YW5pbWF0ZSBpZD0ic3ZnU3Bpbm5lcnMzRG90c1NjYWxlMSIgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNDVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjwvc3ZnPg==" data-original="/img/logo.png" alt="硬底居米的部落格 | The Blog Of Indie Jimmy">
+            </a>
+
+            <nav class="page__nav">
+                <ul class="nav__list clearfix">
+                    
+                        
+                        <li class="nav__item">
+                            <a href="/" alt="首頁" title="首頁">首頁</a>
+                        </li>
+                    
+                        
+                        <li class="nav__item">
+                            <a href="/archives" alt="文章" title="文章">文章</a>
+                        </li>
+                    
+                </ul>
+            </nav>
+
+            <button class="page__menu-btn" type="button">
+                <i class="iconfont icon-menu"></i>
+            </button>
+        </div>
+    </nav>
+</header>
+
+
+        
+    <main class="page__container page__main">
+    <div class="page__content">
+        <article class="page__post">
+    <div class="post__cover">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0Ij48Y2lyY2xlIGN4PSI0IiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgaWQ9InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAiIGF0dHJpYnV0ZU5hbWU9InIiIGJlZ2luPSIwO3N2Z1NwaW5uZXJzM0RvdHNTY2FsZTEuZW5kLTAuMjVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNnMiIGR1cj0iMC43NXMiIHZhbHVlcz0iMzsuMjszIi8+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMjAiIGN5PSIxMiIgcj0iMyIgZmlsbD0iY3VycmVudENvbG9yIj48YW5pbWF0ZSBpZD0ic3ZnU3Bpbm5lcnMzRG90c1NjYWxlMSIgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNDVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjwvc3ZnPg==" data-original="/2019/03/17/make-your-discord-chatbot-with-ruby/cover.jpg" alt="使用 Ruby 製作屬於你的 Discord 聊天機器人">
+    </div>
+
+    <header class="post__info">
+        <h1 class="post__title">使用 Ruby 製作屬於你的 Discord 聊天機器人</h1>
+
+        <div class="post__mark">
+            <div class="mark__block">
+                <i class="mark__icon iconfont icon-write"></i>
+                <ul class="mark__list clearfix">
+                    
+                        <li class="mark__item">
+                            <a target="_blank" rel="noopener" href="https://github.com/jimmy2822">居米</a>
+                        </li>
+                    
+                </ul>
+            </div>
+
+            <div class="mark__block">
+                <i class="mark__icon iconfont icon-time"></i>
+                <ul class="mark__list clearfix">
+                    <li class="mark__item"><span>2019-03-17</span></li>
+                </ul>
+            </div>
+
+            <div class="mark__block">
+                <i class="mark__icon iconfont icon-tab"></i>
+                <ul class="mark__list clearfix">
+                    
+                        <li class="mark__item">
+                            <a href="/tags/Ruby/">Ruby</a>
+                        </li>
+                    
+                        <li class="mark__item">
+                            <a href="/tags/Chatbot/">Chatbot</a>
+                        </li>
+                    
+                </ul>
+            </div>
+        </div>
+    <hr>
+    </header>
+    <div class="post__content">
+        <p>最近很火紅的第一人稱射擊吃雞類型遊戲「Apex Legends」上市8小時內同時在線玩家人數突破100萬人（筆者也是其中之一），這款遊戲和 Ruby 能擦出什麼樣的火花呢？在本文中我們將嘗試使用 Ruby 搭配玩家間熱門的語音通訊社群軟體 Discord 製作聊天機器人再透過 API 獲取玩家於遊戲中的相關戰績資訊。該透過哪些步驟快速製作我們的聊天機器人呢？讓我們接下去看看吧！</p>
+<h2 id="前置作業"><a href="#前置作業" class="headerlink" title="前置作業"></a>前置作業</h2><hr>
+<p>假設你已經安裝好了程式語言 <code>Ruby</code>(如果沒有安裝的請到<a target="_blank" rel="noopener" href="https://www.ruby-lang.org/zh_tw/downloads/">官方網站</a>根據自己所使用的 <code>OS</code> 安裝 <code>Ruby</code>)</p>
+<p>然後我們需要建立一個 <code>Ruby</code> 檔案，在本文中我們建立一個名為  <code>chatbot.rb</code> 的檔案在資料夾 <code>discord</code> 下，其中副檔名為 <code>.rb</code> 代表這是一個 <code>Ruby</code> 的檔案。</p>
+<p>接下來透過<a target="_blank" rel="noopener" href="https://gitbook.tw/chapters/command-line/command-line.html">終端機</a>(何謂終端機可以參考連接文章的前面部份)進入 <code>chatbot.rb</code> 所在的資料夾中並輸入 <code>gem install bundler</code> 透過 <code>Ruby</code> 的套件管理工具 <code>Gem</code> 來安裝相依性套件版本管理工具 <a target="_blank" rel="noopener" href="https://bundler.io/">Bundler</a> 後再輸入指令 <code>bundle init</code> 來初始化 <code>Bundler</code> 的相關資料。完成後會自動建立一個檔名為 <code>Gemfile</code> 的檔案，這個檔案是用來指定 <code>Ruby</code> 專案所使用 <code>Gem</code> 相關套件的設定檔。我們在 <code>Gemfile</code> 檔案中的最下方添加一行設定：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 你的 Ruby 專案資料夾下/Gemfile</span></span><br><span class="line"><span class="comment"># (其他 gem...)</span></span><br><span class="line">gem <span class="string">&quot;discordrb&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>然後透過終端機輸入命令 <code>bundle install</code> 就會自動幫我們安裝別人打包好的 <code>Discord</code> 機器人函式庫 <a target="_blank" rel="noopener" href="https://github.com/meew0/discordrb">discordrb</a>。</p>
+<h3 id="獲得-Discord-Bot-Token"><a href="#獲得-Discord-Bot-Token" class="headerlink" title="獲得 Discord Bot Token"></a>獲得 Discord Bot Token</h3><p>要製作 <code>Discord Bot</code> 需要先獲得機器人的 <code>Token</code>，需要在 <a target="_blank" rel="noopener" href="https://discordapp.com/developers/applications/">Discord Developer Portal</a> 申請一組帳號和在帳號下新增一個應用程式，並在 Bot 頁面生成一組 Token。如下圖範例位置：</p>
+<p><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0Ij48Y2lyY2xlIGN4PSI0IiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgaWQ9InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAiIGF0dHJpYnV0ZU5hbWU9InIiIGJlZ2luPSIwO3N2Z1NwaW5uZXJzM0RvdHNTY2FsZTEuZW5kLTAuMjVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNnMiIGR1cj0iMC43NXMiIHZhbHVlcz0iMzsuMjszIi8+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMjAiIGN5PSIxMiIgcj0iMyIgZmlsbD0iY3VycmVudENvbG9yIj48YW5pbWF0ZSBpZD0ic3ZnU3Bpbm5lcnMzRG90c1NjYWxlMSIgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNDVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjwvc3ZnPg==" data-original="https://imgur.com/UE6JRfo.png" alt="chatbot_token"></p>
+<h2 id="製作測試聊天機器人"><a href="#製作測試聊天機器人" class="headerlink" title="製作測試聊天機器人"></a>製作測試聊天機器人</h2><hr>
+<p>成功註冊帳號並獲得 <code>Token</code> 後我們要開始撰寫聊天機器人的程式碼囉，利用文字編輯器編輯前面所建立的 <code>.rb</code> 檔案並新增下列程式碼：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 調用在 Gemfile 設定並安裝的 disocrd API 函式庫</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">&#x27;discordrb&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 將你在 Discord 申請的機器人 Token 帶入並實例化機器人</span></span><br><span class="line"><span class="comment"># 記得替換 Bot Token 為你自己的 Bot Token</span></span><br><span class="line">bot = <span class="title class_">Discordrb::Bot</span>.new <span class="symbol">token:</span> <span class="string">&#x27;你的 Bot Token&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 在 Discord 頻道中對機器人說話後機器人會回應的行為設定</span></span><br><span class="line"><span class="comment"># 下方程式碼中 content: &#x27;Ping&#x27; 就是代表聊天室收到信息內容為 Ping! 時</span></span><br><span class="line"><span class="comment"># 會觸發事件並產生回覆內容 Pong!</span></span><br><span class="line">bot.message(<span class="symbol">content:</span> <span class="string">&#x27;Ping!&#x27;</span>) <span class="keyword">do</span> |<span class="params">event</span>|</span><br><span class="line">  event.respond <span class="string">&#x27;Pong!&#x27;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 運行機器人</span></span><br><span class="line">bot.run</span><br></pre></td></tr></table></figure>
+
+<p>將檔案編輯完成後透過終端機輸入指令 <code>ruby discord.rb</code> 執行剛剛撰寫的機器人測試 <code>Ruby</code> 檔案。接下來根據官方的文件說明我們要邀請聊天機器人到你所屬的 <code>Discord</code> 聊天頻道中，可以透過一組網址為： <code>https://discordapp.com/oauth2/authorize?&amp;client_id=你的機器人_Client_ID&amp;scope=bot&amp;permissions=0</code></p>
+<p>其中 <code>你的_Client_ID</code> 的部分請替換成 Discord Application 中的 Client ID 如下圖範例所在位置：</p>
+<p><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0Ij48Y2lyY2xlIGN4PSI0IiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgaWQ9InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAiIGF0dHJpYnV0ZU5hbWU9InIiIGJlZ2luPSIwO3N2Z1NwaW5uZXJzM0RvdHNTY2FsZTEuZW5kLTAuMjVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNnMiIGR1cj0iMC43NXMiIHZhbHVlcz0iMzsuMjszIi8+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMjAiIGN5PSIxMiIgcj0iMyIgZmlsbD0iY3VycmVudENvbG9yIj48YW5pbWF0ZSBpZD0ic3ZnU3Bpbm5lcnMzRG90c1NjYWxlMSIgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNDVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjwvc3ZnPg==" data-original="https://imgur.com/1AEoD3q.png" alt="chatbot_client_id"></p>
+<p>在瀏覽器輸入網址後我們會被導引到一個 <code>Discord</code> App 授權的畫面，當授權成功後我們就可以將機器人加入自己的 Discord Server 後在聊天頻道中輸入信息 <code>Ping!</code> 後如果有收到機器人回覆 <code>Pong!</code> 恭喜你機器人到目前為止算是成功設置了！</p>
+<h2 id="將機器人串接-Apex-Legends-API"><a href="#將機器人串接-Apex-Legends-API" class="headerlink" title="將機器人串接 Apex Legends API"></a>將機器人串接 Apex Legends API</h2><hr>
+<p>確認機器人可以正常建立並執行後，下一步我們要來串接 Apex Legends API 將現在只會簡單回應的機器人升級為可以透過關鍵字查詢遊戲戰績的機器人喔！</p>
+<h3 id="註冊-TRN-Apex-Legends-API-帳號"><a href="#註冊-TRN-Apex-Legends-API-帳號" class="headerlink" title="註冊 TRN Apex Legends API 帳號"></a>註冊 TRN Apex Legends API 帳號</h3><p>本文中使用第三方服務 TRN Apex Legends Tracker API 來獲取角色戰績，所以需要先前往 <a target="_blank" rel="noopener" href="https://apex.tracker.gg/site-api">TRN 官網</a> 頁面註冊帳號並申請 API KEY 並在附在 request header 透過 <code>Ruby</code> 發送 API request 時獲得授權才能取得我們想要的資料。</p>
+<h3 id="調整機器人程式碼"><a href="#調整機器人程式碼" class="headerlink" title="調整機器人程式碼"></a>調整機器人程式碼</h3><p>在剛剛測試機器人的檔案 <code>discord.rb</code> 中我們實做了簡單的關鍵字回答功能，現在我們要利用註冊後取得的 API Key 對 TRN Apex Legends API 端點發送請求。請把檔案中的程式碼調整為以下範例。並替換 其中的 chatbot token 和 api key 為官網中註冊後所取得的 key。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 調用 Discord API 函式庫</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">&#x27;discordrb&#x27;</span></span><br><span class="line"><span class="comment"># 宣告一個時間變數儲存呼叫 API 的時間</span></span><br><span class="line"><span class="variable">@call_time_last</span> = <span class="title class_">Time</span>.new</span><br><span class="line"></span><br><span class="line"><span class="comment"># 創建 Discord Bot 並帶入 Token 並將機器人命令附加前綴詞&#x27;!&#x27;</span></span><br><span class="line">bot = <span class="title class_">Discordrb::Commands::CommandBot</span>.new <span class="symbol">token:</span> <span class="string">&#x27;你的_chatbot_token&#x27;</span>, <span class="symbol">prefix:</span> <span class="string">&#x27;!&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 為機器人定義指令 myhero 並處理 Apex Legends API 資料接收與解析</span></span><br><span class="line">bot.command <span class="symbol">:myhero</span> <span class="keyword">do</span> |<span class="params">event, player</span>|</span><br><span class="line">  <span class="comment"># 建立 Api 觸發時間，防止 call rate 超過 API 伺服器限制會有被禁止連線的問題</span></span><br><span class="line">  <span class="variable">@call_time_now</span> = <span class="title class_">Time</span>.now</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 當機器人收到指令 !myhero 玩家_ID 時將 ID 存入變數 player_name 中</span></span><br><span class="line">  <span class="variable">@player_name</span> = player</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 將我們要對 API 發送請求的網址存入變數中，並帶入玩家的 ID</span></span><br><span class="line">  uri = <span class="variable constant_">URI</span>(<span class="string">&quot;https://public-api.tracker.gg/apex/v1/standard/profile/5/<span class="subst">#&#123;<span class="variable">@player_name</span>&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 如果這次呼叫 API 的時間距離上一次呼叫的時間經過兩秒半，正常呼叫 API。</span></span><br><span class="line">  <span class="keyword">if</span> <span class="variable">@call_time_now</span> - <span class="variable">@call_time_last</span> &gt; <span class="number">2.5</span></span><br><span class="line">    <span class="comment"># 紀錄成功呼叫 API 的時間</span></span><br><span class="line">    <span class="variable">@call_time_last</span> = <span class="title class_">Time</span>.now</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 使用 Ruby 的 Net::HTTP 模組處理對 API 發出的 request</span></span><br><span class="line">    <span class="title class_">Net</span><span class="symbol">:</span><span class="symbol">:HTTP</span>.start(uri.host, uri.port, <span class="symbol">use_ssl:</span> <span class="literal">true</span>) <span class="keyword">do</span> |<span class="params">http</span>|</span><br><span class="line">      req = <span class="title class_">Net::HTTP::Get</span>.new(uri)</span><br><span class="line">      <span class="comment"># 將 TRN 申請的 Api Key 帶入 request header 中提供給 API 端點驗證</span></span><br><span class="line">      req[<span class="string">&#x27;TRN-Api-Key&#x27;</span>] = <span class="string">&#x27;在 TRN 取得的 api key&#x27;</span></span><br><span class="line"></span><br><span class="line">      <span class="comment"># 將發送 request 後得到的資料解析成 Json 格式</span></span><br><span class="line">      response = http.request(req)</span><br><span class="line">      <span class="variable">@data</span> = <span class="variable constant_">JSON</span>.parse(response.body)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 從 API 拿到的資料解析完後使用 event.respond 方法讓機器人在聊天室回應信息</span></span><br><span class="line">    event.respond <span class="string">&quot;</span></span><br><span class="line"><span class="string">    <span class="subst">#&#123;<span class="variable">@data</span>[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;children&#x27;</span>].first[<span class="string">&#x27;metadata&#x27;</span>][<span class="string">&#x27;icon&#x27;</span>]&#125;</span></span></span><br><span class="line"><span class="string">    等級 (Level)：<span class="subst">#&#123;<span class="variable">@data</span>[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;stats&#x27;</span>].first[<span class="string">&#x27;displayValue&#x27;</span>]&#125;</span></span></span><br><span class="line"><span class="string">    使用英雄 (Legend Name)：<span class="subst">#&#123;<span class="variable">@data</span>[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;children&#x27;</span>].first[<span class="string">&#x27;metadata&#x27;</span>][<span class="string">&#x27;legend_name&#x27;</span>]&#125;</span></span></span><br><span class="line"><span class="string">    擊殺數 (<span class="subst">#&#123;<span class="variable">@data</span>[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;children&#x27;</span>].first[<span class="string">&#x27;stats&#x27;</span>].first[<span class="string">&#x27;metadata&#x27;</span>][<span class="string">&#x27;name&#x27;</span>]&#125;</span>)：<span class="subst">#&#123;<span class="variable">@data</span>[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;children&#x27;</span>].first[<span class="string">&#x27;stats&#x27;</span>].first[<span class="string">&#x27;displayValue&#x27;</span>]&#125;</span></span></span><br><span class="line"><span class="string">    &quot;</span></span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="comment"># 如果距離上次呼叫 API 所經過時間小於三秒，則顯示忙碌信息。</span></span><br><span class="line">    event.respond <span class="string">&quot;目前忙碌中，請稍待片刻再呼喚我...&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 run 方法讓機器人運行</span></span><br><span class="line">bot.run</span><br></pre></td></tr></table></figure>
+
+<h3 id="測試機器人是否正常回應"><a href="#測試機器人是否正常回應" class="headerlink" title="測試機器人是否正常回應"></a>測試機器人是否正常回應</h3><p>調整程式碼後透過終端機再次輸入 <code>ruby discord.rb</code> 讓 <code>Ruby</code> 執行我們撰寫好的機器人檔案，接著到聊天機器人所在的 <code>Discord</code> 伺服器中輸入 <code>!myhero 遊戲ID</code> 會發現機器人自動回覆該玩家在遊戲中使用的角色圖片、帳號等級、擊殺數。如下圖範例：</p>
+<p><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0Ij48Y2lyY2xlIGN4PSI0IiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgaWQ9InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAiIGF0dHJpYnV0ZU5hbWU9InIiIGJlZ2luPSIwO3N2Z1NwaW5uZXJzM0RvdHNTY2FsZTEuZW5kLTAuMjVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNnMiIGR1cj0iMC43NXMiIHZhbHVlcz0iMzsuMjszIi8+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMjAiIGN5PSIxMiIgcj0iMyIgZmlsbD0iY3VycmVudENvbG9yIj48YW5pbWF0ZSBpZD0ic3ZnU3Bpbm5lcnMzRG90c1NjYWxlMSIgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNDVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjwvc3ZnPg==" data-original="https://i.imgur.com/GTWGJkE.gif" alt="discord_chatbot_demo"></p>
+<h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><hr>
+<p>在本文中我們透過 <code>Ruby</code> 內建強大的套件工具 <code>Gem</code> 來安裝 <code>Discord</code> 機器人函式庫並撰寫程式碼製作簡易的聊天機器人。接下來串接第三方 API 讓機器人可以接收到 <code>Discord</code> 信息的關鍵字後透過呼叫第三方 API 端點獲取遊戲的相關資料並在聊天室中產生回應。這樣的流程下我們動手製作了屬於自己的聊天機器人，讓聊天室的戰友們可以快速獲得遊戲資訊，是不是一種 <code>Ruby</code> 很有趣又實用的應用呢？</p>
+
+
+        <div class="post__prevs">
+            <div class="post__prev">
+                
+                <a href="/2019/02/18/manage-ruby-versions-with-rbenv/" title="使用 rbenv 管理 Ruby 版本"><i class="iconfont icon-prev"></i>使用 rbenv 管理 Ruby 版本</a>
+                
+            </div>
+            <div class="post__prev post__prev--right">
+                
+                <a href="/2019/08/24/object-oriented-in-ruby/" title="想找到脫離新手村的方向？ 讓 Ruby 中的物件導向基礎為你引路！">想找到脫離新手村的方向？ 讓 Ruby 中的物件導向基礎為你引路！<i class="iconfont icon-next"></i></a>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+        
+        
+            <div id="disqus_thread"></div>
+        
+    </div>
+
+    <aside class="page__sidebar">
+    <!--  -->
+
+    <form id="page-search-from" class="page__search-from" action="/search/">
+        <label class="search-form__item">
+            <input class="input" type="text" name="search" placeholder="Search...">
+            <i class="iconfont icon-search"></i>
+        </label>
+    </form>
+
+    
+        <div class="sidebar__block">
+            <h3 class="block__title">簡介</h3>
+            <p class="block__text">硬底居米的部落格，關於寫程式、遊戲、電影、音樂、閱讀...</p>
+        </div>
+    
+
+    <div class="sidebar__block">
+        <h3 class="block__title">文章分類</h3>
+        <ul class="block-list"><li class="block-list-item"><a class="block-list-link" href="/categories/%E6%B2%99%E7%99%BC%E4%B8%8A%E7%9A%84%E5%B1%85%E7%B1%B3/">沙發上的居米</a><span class="block-list-count">1</span></li><li class="block-list-item"><a class="block-list-link" href="/categories/%E6%80%AA%E5%A5%87%E5%B0%88%E6%A1%88%E9%9B%86%E6%95%A3%E5%9C%B0/">怪奇專案集散地</a><span class="block-list-count">1</span></li><li class="block-list-item"><a class="block-list-link" href="/categories/Ruby-On-Rails-%E8%8F%9C%E9%B3%A5%E7%9A%84%E9%80%86%E8%A5%B2/">Ruby On Rails 菜鳥的逆襲</a><span class="block-list-count">2</span></li><li class="block-list-item"><a class="block-list-link" href="/categories/Ruby-Design-Pattern-%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/">Ruby Design Pattern 設計模式</a><span class="block-list-count">1</span></li></ul>
+    </div>
+    
+    <div class="sidebar__block">
+        <h3 class="block__title">最新文章</h3>
+        
+        <ul class="block-list latest-post-list">
+            
+                    <li class="latest-post-item">
+                        <a href="/2019/10/25/netflix-chosen-rhythm-and-flow/" title="Netflix Chosen - Rhythm + Flow 嘻哈王">
+                            <div class="item__cover">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0Ij48Y2lyY2xlIGN4PSI0IiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgaWQ9InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAiIGF0dHJpYnV0ZU5hbWU9InIiIGJlZ2luPSIwO3N2Z1NwaW5uZXJzM0RvdHNTY2FsZTEuZW5kLTAuMjVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNnMiIGR1cj0iMC43NXMiIHZhbHVlcz0iMzsuMjszIi8+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMjAiIGN5PSIxMiIgcj0iMyIgZmlsbD0iY3VycmVudENvbG9yIj48YW5pbWF0ZSBpZD0ic3ZnU3Bpbm5lcnMzRG90c1NjYWxlMSIgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNDVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjwvc3ZnPg==" data-original="https://i.imgur.com/yfaKepL.png" alt="Netflix Chosen - Rhythm + Flow 嘻哈王" />
+                            </div>
+                            <div class="item__info">
+                                <h3 class="item__title">Netflix Chosen - Rhythm + Flow 嘻哈王</h3>
+                                <span class="item__text">2019-10-25</span>
+                            </div>
+                        </a>
+                    </li>
+                
+                    <li class="latest-post-item">
+                        <a href="/2019/10/15/design-pattern-decorator/" title="Ruby 中的設計模式－裝飾模式 Decorator">
+                            <div class="item__cover">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0Ij48Y2lyY2xlIGN4PSI0IiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgaWQ9InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAiIGF0dHJpYnV0ZU5hbWU9InIiIGJlZ2luPSIwO3N2Z1NwaW5uZXJzM0RvdHNTY2FsZTEuZW5kLTAuMjVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNnMiIGR1cj0iMC43NXMiIHZhbHVlcz0iMzsuMjszIi8+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMjAiIGN5PSIxMiIgcj0iMyIgZmlsbD0iY3VycmVudENvbG9yIj48YW5pbWF0ZSBpZD0ic3ZnU3Bpbm5lcnMzRG90c1NjYWxlMSIgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNDVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjwvc3ZnPg==" data-original="/2019/10/15/design-pattern-decorator/cover.jpg" alt="Ruby 中的設計模式－裝飾模式 Decorator" />
+                            </div>
+                            <div class="item__info">
+                                <h3 class="item__title">Ruby 中的設計模式－裝飾模式 Decorator</h3>
+                                <span class="item__text">2019-10-15</span>
+                            </div>
+                        </a>
+                    </li>
+                
+                    <li class="latest-post-item">
+                        <a href="/2019/08/24/object-oriented-in-ruby/" title="想找到脫離新手村的方向？ 讓 Ruby 中的物件導向基礎為你引路！">
+                            <div class="item__cover">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0Ij48Y2lyY2xlIGN4PSI0IiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgaWQ9InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAiIGF0dHJpYnV0ZU5hbWU9InIiIGJlZ2luPSIwO3N2Z1NwaW5uZXJzM0RvdHNTY2FsZTEuZW5kLTAuMjVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNnMiIGR1cj0iMC43NXMiIHZhbHVlcz0iMzsuMjszIi8+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMjAiIGN5PSIxMiIgcj0iMyIgZmlsbD0iY3VycmVudENvbG9yIj48YW5pbWF0ZSBpZD0ic3ZnU3Bpbm5lcnMzRG90c1NjYWxlMSIgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNDVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjwvc3ZnPg==" data-original="/2019/08/24/object-oriented-in-ruby/cover.jpg" alt="想找到脫離新手村的方向？ 讓 Ruby 中的物件導向基礎為你引路！" />
+                            </div>
+                            <div class="item__info">
+                                <h3 class="item__title">想找到脫離新手村的方向？ 讓 Ruby 中的物件導向基礎為你引路！</h3>
+                                <span class="item__text">2019-08-24</span>
+                            </div>
+                        </a>
+                    </li>
+                
+                    <li class="latest-post-item">
+                        <a href="/2019/03/17/make-your-discord-chatbot-with-ruby/" title="使用 Ruby 製作屬於你的 Discord 聊天機器人">
+                            <div class="item__cover">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0Ij48Y2lyY2xlIGN4PSI0IiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgaWQ9InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAiIGF0dHJpYnV0ZU5hbWU9InIiIGJlZ2luPSIwO3N2Z1NwaW5uZXJzM0RvdHNTY2FsZTEuZW5kLTAuMjVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNnMiIGR1cj0iMC43NXMiIHZhbHVlcz0iMzsuMjszIi8+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMjAiIGN5PSIxMiIgcj0iMyIgZmlsbD0iY3VycmVudENvbG9yIj48YW5pbWF0ZSBpZD0ic3ZnU3Bpbm5lcnMzRG90c1NjYWxlMSIgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNDVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjwvc3ZnPg==" data-original="/2019/03/17/make-your-discord-chatbot-with-ruby/cover.jpg" alt="使用 Ruby 製作屬於你的 Discord 聊天機器人" />
+                            </div>
+                            <div class="item__info">
+                                <h3 class="item__title">使用 Ruby 製作屬於你的 Discord 聊天機器人</h3>
+                                <span class="item__text">2019-03-17</span>
+                            </div>
+                        </a>
+                    </li>
+                
+        </ul>
+    
+    </div>
+
+    <div class="sidebar__block">
+        <h3 class="block__title">文章標籤</h3>
+        
+        <ul class="block-list tag-list clearfix">
+            
+                    <li class="tag-item">
+                        <a class="tag-link" href="/tags/Chatbot/">Chatbot</a>
+                    </li>
+                
+                    <li class="tag-item">
+                        <a class="tag-link" href="/tags/Design-Pattern/">Design-Pattern</a>
+                    </li>
+                
+                    <li class="tag-item">
+                        <a class="tag-link" href="/tags/Developer-Tools/">Developer Tools</a>
+                    </li>
+                
+                    <li class="tag-item">
+                        <a class="tag-link" href="/tags/Netflix/">Netflix</a>
+                    </li>
+                
+                    <li class="tag-item">
+                        <a class="tag-link" href="/tags/Object-Oriented/">Object-Oriented</a>
+                    </li>
+                
+                    <li class="tag-item">
+                        <a class="tag-link" href="/tags/Ruby/">Ruby</a>
+                    </li>
+                
+                    <li class="tag-item">
+                        <a class="tag-link" href="/tags/Ruby-On-Rails/">Ruby On Rails</a>
+                    </li>
+                
+                    <li class="tag-item">
+                        <a class="tag-link" href="/tags/%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91/">物件導向</a>
+                    </li>
+                
+                    <li class="tag-item">
+                        <a class="tag-link" href="/tags/%E7%94%9F%E6%B4%BB/">生活</a>
+                    </li>
+                
+                    <li class="tag-item">
+                        <a class="tag-link" href="/tags/%E7%AF%80%E7%9B%AE%E5%BF%83%E5%BE%97/">節目心得</a>
+                    </li>
+                
+                    <li class="tag-item">
+                        <a class="tag-link" href="/tags/%E9%A5%92%E8%88%8C/">饒舌</a>
+                    </li>
+                
+        </ul>
+    
+    </div>
+
+    <!-- <div class="sidebar__block">
+        <h3 class="block__title">aside.friend_links</h3>
+        <ul class="block-list">
+            
+        </ul>
+    </div> -->
+</aside>
+</main>
+
+
+        
+            <!-- 页脚 -->
+<footer class="page__footer">
+    <section class="footer__bottom">
+        <div class="page__container footer__container">
+            <p class="footer__copyright"> Copyright © 2019 Indie Jimmy. All rights reserved </p>
+
+            <ul class="footer__social-network clearfix">
+                
+                
+                    <li class="social-network__item">
+                        <a href="https://github.com/jimmy2822" target="_blank" title="github">
+                            <i class="iconfont icon-github"></i>
+                        </a>
+                    </li>
+                
+                    <li class="social-network__item">
+                        <a href="mailto:jimmy2822@gmail.com" target="_blank" title="email">
+                            <i class="iconfont icon-email"></i>
+                        </a>
+                    </li>
+                
+                
+            </ul>
+        </div>
+    </section>
+</footer>
+
+        
+
+        
+            <!-- 返回顶部 -->
+<div id="back-top" class="back-top back-top--hidden js-hidden">
+    <i class="iconfont icon-top"></i>
+</div>
+        
+    </div>
+
+    <!-- build:js /js/common.js -->
+        <script type="text/javascript" src="/js/common/utils.js"></script>
+        <script type="text/javascript" src="/js/common/pack.js"></script>
+        <script type="text/javascript" src="/js/common/animation.js"></script>
+        <script type="text/javascript" src="/js/layout/loading.js"></script>
+        <script type="text/javascript" src="/js/layout/header.js"></script>
+        <script type="text/javascript" src="/js/layout/back-top.js"></script>
+        <script type="text/javascript" src="/js/layout/post.js"></script>
+    <!-- endbuild -->
+
+    
+    
+<script src="/js/page/post.js"></script>
+
+
+
+    
+    
+
+
+    <script>
+        var disqus_shortname = 'blog-raiden-me';
+        var disqus_config = function () {
+            this.page.url = 'https://blog.raiden.me/2019/03/17/make-your-discord-chatbot-with-ruby/';
+            this.page.identifier = '/2019/03/17/make-your-discord-chatbot-with-ruby/';
+            this.page.title = '使用 Ruby 製作屬於你的 Discord 聊天機器人';
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+     
+
+
+
+
+
+
+
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>

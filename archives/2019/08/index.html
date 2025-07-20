@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+    <meta charset="utf-8" />
+    
+        <title>硬底居米 Indie Jimmy</title>
+    
+
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="Jimmy Wu" /> <meta name="keywords" content="ruby on rails, gamedav, game development, developer, web developer, ruby"/>
+<meta name="description" content="硬底居米的部落格，關於寫程式、遊戲、電影、音樂、閱讀..." />
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="robots" content="all" />
+
+<link rel="canonical" href="https://blog.raiden.me/archives/2019/08/index.html">
+
+<link rel="icon" type="image/png" href="/img/logo.png" sizes="32x32">
+
+
+
+
+
+<!-- CSS -->
+
+<link rel="stylesheet" href="/scss/base/index.css">
+
+
+<!-- Prefetch -->
+
+
+
+
+
+
+<!-- RSS -->
+<link rel="alternate" href="/atom.xml" title="硬底居米的部落格 | The Blog Of Indie Jimmy" type="application/atom+xml">
+
+<!-- 统计 -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122827207-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-122827207-2');
+  </script>
+
+
+
+<!-- 為圖片加入 og 協議 -->
+<meta name="description" content="硬底居米的部落格，關於寫程式、遊戲、電影、音樂、閱讀...">
+<meta property="og:type" content="website">
+<meta property="og:title" content="硬底居米的部落格 | The Blog Of Indie Jimmy">
+<meta property="og:url" content="https://blog.raiden.me/">
+<meta property="og:site_name" content="硬底居米的部落格 | The Blog Of Indie Jimmy">
+<meta property="og:description" content="硬底居米的部落格，關於寫程式、遊戲、電影、音樂、閱讀...">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://blog.raiden.me/img/default_cover.jpg">
+<meta property="article:author" content="[object Object]">
+<meta property="article:tag" content="ruby on rails, gamedav, game development, developer, web developer, ruby">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.raiden.me/img/default_cover.jpg">
+<meta property="fb:app_id" content="2191740657808537">
+
+
+<!-- 加入 FB SDK -->
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId            : 2191740657808537,
+      autoLogAppEvents : true,
+      xfbml            : true,
+      version          : 'v3.2'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+<!-- 使用 jQuery -->
+<script src= '/js/libs/jquery.min.js'></script>
+
+<!-- Code highlighting is handled by Hexo's built-in system -->
+
+
+    
+    
+    
+<link rel="stylesheet" href="/scss/views/page/archive.css">
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body ontouchstart>
+    
+        <!-- loading 页面 -->
+<div id="page-loading" class="page page-loading" style="background-image: url('/img/loading.gif')"></div>
+    
+
+    <div id="page" class="page js-hidden">
+        
+    <!-- 页头 -->
+<header class="page__small-header page__header--small">
+    <nav class="page__navbar">
+        <div class="page__container navbar-container">
+            <a class="page__logo" href="/" title="硬底居米的部落格 | The Blog Of Indie Jimmy" alt="硬底居米的部落格 | The Blog Of Indie Jimmy">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0Ij48Y2lyY2xlIGN4PSI0IiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgaWQ9InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAiIGF0dHJpYnV0ZU5hbWU9InIiIGJlZ2luPSIwO3N2Z1NwaW5uZXJzM0RvdHNTY2FsZTEuZW5kLTAuMjVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNnMiIGR1cj0iMC43NXMiIHZhbHVlcz0iMzsuMjszIi8+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMjAiIGN5PSIxMiIgcj0iMyIgZmlsbD0iY3VycmVudENvbG9yIj48YW5pbWF0ZSBpZD0ic3ZnU3Bpbm5lcnMzRG90c1NjYWxlMSIgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNDVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjwvc3ZnPg==" data-original="/img/logo.png" alt="硬底居米的部落格 | The Blog Of Indie Jimmy">
+            </a>
+
+            <nav class="page__nav">
+                <ul class="nav__list clearfix">
+                    
+                        
+                        <li class="nav__item">
+                            <a href="/" alt="首頁" title="首頁">首頁</a>
+                        </li>
+                    
+                        
+                        <li class="nav__item">
+                            <a href="/archives" alt="文章" title="文章">文章</a>
+                        </li>
+                    
+                </ul>
+            </nav>
+
+            <button class="page__menu-btn" type="button">
+                <i class="iconfont icon-menu"></i>
+            </button>
+        </div>
+    </nav>
+</header>
+
+
+        
+    
+<main class="page__container page__main">
+    <div class="page__content">
+        
+        <nav class="mb-main__nav">
+            
+            <a
+                class="nav__item"
+                href="/archives/"
+                alt="2019年">
+                2019年
+            </a>
+        
+        </nav>
+    
+
+        <div class="page__posts clearfix">
+            
+                <div class="page__post">
+                    <article itemscope itemtype="http://schema.org/Article" class="page__mini-article">
+    <div class="mini-article__cover">
+        
+        
+            <img itemprop="image" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0Ij48Y2lyY2xlIGN4PSI0IiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgaWQ9InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAiIGF0dHJpYnV0ZU5hbWU9InIiIGJlZ2luPSIwO3N2Z1NwaW5uZXJzM0RvdHNTY2FsZTEuZW5kLTAuMjVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNnMiIGR1cj0iMC43NXMiIHZhbHVlcz0iMzsuMjszIi8+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMjAiIGN5PSIxMiIgcj0iMyIgZmlsbD0iY3VycmVudENvbG9yIj48YW5pbWF0ZSBpZD0ic3ZnU3Bpbm5lcnMzRG90c1NjYWxlMSIgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNDVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjwvc3ZnPg==" data-original="/2019/08/24/object-oriented-in-ruby/cover.jpg" alt="想找到脫離新手村的方向？ 讓 Ruby 中的物件導向基礎為你引路！"/>
+        
+        <div itemprop="datePublished" content="" class="mini-article__date">
+            <span class="date__day">24</span>
+            
+                <span class="date__month">八月</span>
+            
+        </div>
+        <a itemprop="url" class="iconfont icon-enter" href="/2019/08/24/object-oriented-in-ruby/"></a>
+    </div>
+    <div class="mini-article__info">
+        <h3 itemprop="name" class="mini-article__title">
+            <a itemprop="url" href="/2019/08/24/object-oriented-in-ruby/" title="想找到脫離新手村的方向？ 讓 Ruby 中的物件導向基礎為你引路！">想找到脫離新手村的方向？ 讓 Ruby 中的物件導向基礎為你引路！</a>
+        </h3>
+        <p class="mini-article__author">by
+            
+                <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+                    
+                        <span itemprop="name">居米</span>
+                    
+                </span>
+            
+        </p>
+        <p itemprop="articleSection" class="min-article__desc">
+            還記得一開始自學程式語言時，大家一定或多或少都聽過一個名詞 物件導向。然後身為程式新手和非程式相關科系畢業的你也許會開始 Google 它到底是什麼意思，然後你會在 維基百科 上查到諸如此類的解釋：
+
+物件導向程式設計（英語：Object-oriented programming，縮寫：OOP）是種具有物件概念的程式編程典範，同時也是一種程式開發的抽象方針。它可能包含資料、屬性、程式碼與方法。物件則指的是類別的實體。它將物件作為程式的基本單元，將程式和資料封裝其中，以提高軟體的重用性、靈活性和擴充性，物件裡的程式可以存取及經常修改物件相關連的資料。在物件導向程式編程裡，電腦程式會被設計成彼此相關的物件。
+
+當下看完名詞解釋，如果你和筆者一樣只是個普通人的話應該根據名詞解釋還是無法了解一個抽象的概念，然後可能因為你強盛的好奇心，會繼續在網路上搜尋更多的文章來理解這樣抽象的概念，但有可能你會發現閱讀更多文章後仍然似懂非懂，不要擔心這是屬於正常的現象。
+找到方向
+上述所描寫的正是筆者個人學習上的經歷，看了些許文章後，仍然覺得少了點什麼才能對整體抽象的理論有更進一步的理解。直到閱讀了 Practical Object-Oriented Design: An Agile Primer Using Ruby 才發現作者 Sandi Metz 很懂得如何引導新手走入物件導向的大門。例如談論到物件導向時一定會提到的幾個重要原則：SOLID（單一功能、開閉原則、李氏替換、介面隔離、依賴反轉）當你看過這些原則後對於實際開發上該怎麼應用上，根據筆者個人的學習經驗似乎只會產生更多的疑問。但作者似乎知道與其講那些理論，不如透過探討實際的程式碼由淺入深的方式一步一步告訴你如果同樣的程式碼，採用物件導向的方式撰寫程式碼會有什麼優缺點？如果不使用物件導向的方式去寫可能會造成後續維護程式碼上困難？筆者看完那本書後終於對物件導向有了更深一層的概念，它也提供了思考程式碼「為什麼要這樣寫會更好？」的方向，而不僅僅是停在「把程式碼寫出來會動就好⋯⋯」的層面上。
+接下來將分享書中部分的概念，去探討如何運用技巧去撰寫出容易維護的程式碼。
+管理相依性 Manage Dependencies
+在物件導向的程式世界中，物件會有所謂 相依性 的問題，什麼是相依性呢？我們舉現實生活中的車子來理解這個抽象概念。車子是一種交通工具對吧？在 Ruby 中車子將可能會是車子這個類別中的一個實體物件，它的行為是進行移動。那車子為什麼可以移動的呢？車子是需要靠輪子來移動的，我們也可以說車子依賴輪子來進行移動，沒有輪子的車子可能哪也去不了，所以車子對輪子產生了很高的相依性。
+        </p>
+        <div class="min-article__tags">
+            <i class="iconfont icon-tab"></i>
+            <ul class="tags__list clearfix">
+                
+                    <li class="tags__item">
+                        <a href="/tags/Ruby/">Ruby</a>
+                    </li>
+                
+                    <li class="tags__item">
+                        <a href="/tags/Object-Oriented/">Object-Oriented</a>
+                    </li>
+                
+                    <li class="tags__item">
+                        <a href="/tags/%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91/">物件導向</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</article>
+
+                </div>
+            
+        </div>
+
+        
+            
+        <nav class="page__paginator">
+            <ul class="paginator__list clearfix">
+                
+            <li class="paginator__item">
+                <span>1</span>
+            </li>
+        
+            </ul>
+        </nav>
+    
+        
+    </div>
+
+    <aside class="page__sidebar">
+    <!--  -->
+
+    <form id="page-search-from" class="page__search-from" action="/search/">
+        <label class="search-form__item">
+            <input class="input" type="text" name="search" placeholder="Search...">
+            <i class="iconfont icon-search"></i>
+        </label>
+    </form>
+
+    
+        <div class="sidebar__block">
+            <h3 class="block__title">簡介</h3>
+            <p class="block__text">硬底居米的部落格，關於寫程式、遊戲、電影、音樂、閱讀...</p>
+        </div>
+    
+
+    <div class="sidebar__block">
+        <h3 class="block__title">文章分類</h3>
+        <ul class="block-list"><li class="block-list-item"><a class="block-list-link" href="/categories/%E6%B2%99%E7%99%BC%E4%B8%8A%E7%9A%84%E5%B1%85%E7%B1%B3/">沙發上的居米</a><span class="block-list-count">1</span></li><li class="block-list-item"><a class="block-list-link" href="/categories/%E6%80%AA%E5%A5%87%E5%B0%88%E6%A1%88%E9%9B%86%E6%95%A3%E5%9C%B0/">怪奇專案集散地</a><span class="block-list-count">1</span></li><li class="block-list-item"><a class="block-list-link" href="/categories/Ruby-On-Rails-%E8%8F%9C%E9%B3%A5%E7%9A%84%E9%80%86%E8%A5%B2/">Ruby On Rails 菜鳥的逆襲</a><span class="block-list-count">2</span></li><li class="block-list-item"><a class="block-list-link" href="/categories/Ruby-Design-Pattern-%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F/">Ruby Design Pattern 設計模式</a><span class="block-list-count">1</span></li></ul>
+    </div>
+    
+    <div class="sidebar__block">
+        <h3 class="block__title">最新文章</h3>
+        
+        <ul class="block-list latest-post-list">
+            
+                    <li class="latest-post-item">
+                        <a href="/2019/10/25/netflix-chosen-rhythm-and-flow/" title="Netflix Chosen - Rhythm + Flow 嘻哈王">
+                            <div class="item__cover">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0Ij48Y2lyY2xlIGN4PSI0IiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgaWQ9InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAiIGF0dHJpYnV0ZU5hbWU9InIiIGJlZ2luPSIwO3N2Z1NwaW5uZXJzM0RvdHNTY2FsZTEuZW5kLTAuMjVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNnMiIGR1cj0iMC43NXMiIHZhbHVlcz0iMzsuMjszIi8+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMjAiIGN5PSIxMiIgcj0iMyIgZmlsbD0iY3VycmVudENvbG9yIj48YW5pbWF0ZSBpZD0ic3ZnU3Bpbm5lcnMzRG90c1NjYWxlMSIgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNDVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjwvc3ZnPg==" data-original="https://i.imgur.com/yfaKepL.png" alt="Netflix Chosen - Rhythm + Flow 嘻哈王" />
+                            </div>
+                            <div class="item__info">
+                                <h3 class="item__title">Netflix Chosen - Rhythm + Flow 嘻哈王</h3>
+                                <span class="item__text">2019-10-25</span>
+                            </div>
+                        </a>
+                    </li>
+                
+                    <li class="latest-post-item">
+                        <a href="/2019/10/15/design-pattern-decorator/" title="Ruby 中的設計模式－裝飾模式 Decorator">
+                            <div class="item__cover">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0Ij48Y2lyY2xlIGN4PSI0IiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgaWQ9InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAiIGF0dHJpYnV0ZU5hbWU9InIiIGJlZ2luPSIwO3N2Z1NwaW5uZXJzM0RvdHNTY2FsZTEuZW5kLTAuMjVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNnMiIGR1cj0iMC43NXMiIHZhbHVlcz0iMzsuMjszIi8+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMjAiIGN5PSIxMiIgcj0iMyIgZmlsbD0iY3VycmVudENvbG9yIj48YW5pbWF0ZSBpZD0ic3ZnU3Bpbm5lcnMzRG90c1NjYWxlMSIgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNDVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjwvc3ZnPg==" data-original="/2019/10/15/design-pattern-decorator/cover.jpg" alt="Ruby 中的設計模式－裝飾模式 Decorator" />
+                            </div>
+                            <div class="item__info">
+                                <h3 class="item__title">Ruby 中的設計模式－裝飾模式 Decorator</h3>
+                                <span class="item__text">2019-10-15</span>
+                            </div>
+                        </a>
+                    </li>
+                
+                    <li class="latest-post-item">
+                        <a href="/2019/08/24/object-oriented-in-ruby/" title="想找到脫離新手村的方向？ 讓 Ruby 中的物件導向基礎為你引路！">
+                            <div class="item__cover">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0Ij48Y2lyY2xlIGN4PSI0IiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgaWQ9InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAiIGF0dHJpYnV0ZU5hbWU9InIiIGJlZ2luPSIwO3N2Z1NwaW5uZXJzM0RvdHNTY2FsZTEuZW5kLTAuMjVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNnMiIGR1cj0iMC43NXMiIHZhbHVlcz0iMzsuMjszIi8+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMjAiIGN5PSIxMiIgcj0iMyIgZmlsbD0iY3VycmVudENvbG9yIj48YW5pbWF0ZSBpZD0ic3ZnU3Bpbm5lcnMzRG90c1NjYWxlMSIgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNDVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjwvc3ZnPg==" data-original="/2019/08/24/object-oriented-in-ruby/cover.jpg" alt="想找到脫離新手村的方向？ 讓 Ruby 中的物件導向基礎為你引路！" />
+                            </div>
+                            <div class="item__info">
+                                <h3 class="item__title">想找到脫離新手村的方向？ 讓 Ruby 中的物件導向基礎為你引路！</h3>
+                                <span class="item__text">2019-08-24</span>
+                            </div>
+                        </a>
+                    </li>
+                
+                    <li class="latest-post-item">
+                        <a href="/2019/03/17/make-your-discord-chatbot-with-ruby/" title="使用 Ruby 製作屬於你的 Discord 聊天機器人">
+                            <div class="item__cover">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0Ij48Y2lyY2xlIGN4PSI0IiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgaWQ9InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAiIGF0dHJpYnV0ZU5hbWU9InIiIGJlZ2luPSIwO3N2Z1NwaW5uZXJzM0RvdHNTY2FsZTEuZW5kLTAuMjVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjMiIGZpbGw9ImN1cnJlbnRDb2xvciI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNnMiIGR1cj0iMC43NXMiIHZhbHVlcz0iMzsuMjszIi8+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMjAiIGN5PSIxMiIgcj0iMyIgZmlsbD0iY3VycmVudENvbG9yIj48YW5pbWF0ZSBpZD0ic3ZnU3Bpbm5lcnMzRG90c1NjYWxlMSIgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49InN2Z1NwaW5uZXJzM0RvdHNTY2FsZTAuZW5kLTAuNDVzIiBkdXI9IjAuNzVzIiB2YWx1ZXM9IjM7LjI7MyIvPjwvY2lyY2xlPjwvc3ZnPg==" data-original="/2019/03/17/make-your-discord-chatbot-with-ruby/cover.jpg" alt="使用 Ruby 製作屬於你的 Discord 聊天機器人" />
+                            </div>
+                            <div class="item__info">
+                                <h3 class="item__title">使用 Ruby 製作屬於你的 Discord 聊天機器人</h3>
+                                <span class="item__text">2019-03-17</span>
+                            </div>
+                        </a>
+                    </li>
+                
+        </ul>
+    
+    </div>
+
+    <div class="sidebar__block">
+        <h3 class="block__title">文章標籤</h3>
+        
+        <ul class="block-list tag-list clearfix">
+            
+                    <li class="tag-item">
+                        <a class="tag-link" href="/tags/Chatbot/">Chatbot</a>
+                    </li>
+                
+                    <li class="tag-item">
+                        <a class="tag-link" href="/tags/Design-Pattern/">Design-Pattern</a>
+                    </li>
+                
+                    <li class="tag-item">
+                        <a class="tag-link" href="/tags/Developer-Tools/">Developer Tools</a>
+                    </li>
+                
+                    <li class="tag-item">
+                        <a class="tag-link" href="/tags/Netflix/">Netflix</a>
+                    </li>
+                
+                    <li class="tag-item">
+                        <a class="tag-link" href="/tags/Object-Oriented/">Object-Oriented</a>
+                    </li>
+                
+                    <li class="tag-item">
+                        <a class="tag-link" href="/tags/Ruby/">Ruby</a>
+                    </li>
+                
+                    <li class="tag-item">
+                        <a class="tag-link" href="/tags/Ruby-On-Rails/">Ruby On Rails</a>
+                    </li>
+                
+                    <li class="tag-item">
+                        <a class="tag-link" href="/tags/%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91/">物件導向</a>
+                    </li>
+                
+                    <li class="tag-item">
+                        <a class="tag-link" href="/tags/%E7%94%9F%E6%B4%BB/">生活</a>
+                    </li>
+                
+                    <li class="tag-item">
+                        <a class="tag-link" href="/tags/%E7%AF%80%E7%9B%AE%E5%BF%83%E5%BE%97/">節目心得</a>
+                    </li>
+                
+                    <li class="tag-item">
+                        <a class="tag-link" href="/tags/%E9%A5%92%E8%88%8C/">饒舌</a>
+                    </li>
+                
+        </ul>
+    
+    </div>
+
+    <!-- <div class="sidebar__block">
+        <h3 class="block__title">aside.friend_links</h3>
+        <ul class="block-list">
+            
+        </ul>
+    </div> -->
+</aside>
+</main>
+
+
+        
+            <!-- 页脚 -->
+<footer class="page__footer">
+    <section class="footer__bottom">
+        <div class="page__container footer__container">
+            <p class="footer__copyright"> Copyright © 2019 Indie Jimmy. All rights reserved </p>
+
+            <ul class="footer__social-network clearfix">
+                
+                
+                    <li class="social-network__item">
+                        <a href="https://github.com/jimmy2822" target="_blank" title="github">
+                            <i class="iconfont icon-github"></i>
+                        </a>
+                    </li>
+                
+                    <li class="social-network__item">
+                        <a href="mailto:jimmy2822@gmail.com" target="_blank" title="email">
+                            <i class="iconfont icon-email"></i>
+                        </a>
+                    </li>
+                
+                
+            </ul>
+        </div>
+    </section>
+</footer>
+
+        
+
+        
+            <!-- 返回顶部 -->
+<div id="back-top" class="back-top back-top--hidden js-hidden">
+    <i class="iconfont icon-top"></i>
+</div>
+        
+    </div>
+
+    <!-- build:js /js/common.js -->
+        <script type="text/javascript" src="/js/common/utils.js"></script>
+        <script type="text/javascript" src="/js/common/pack.js"></script>
+        <script type="text/javascript" src="/js/common/animation.js"></script>
+        <script type="text/javascript" src="/js/layout/loading.js"></script>
+        <script type="text/javascript" src="/js/layout/header.js"></script>
+        <script type="text/javascript" src="/js/layout/back-top.js"></script>
+        <script type="text/javascript" src="/js/layout/post.js"></script>
+    <!-- endbuild -->
+
+    
+    
+
+    
+    
+
+     
+
+
+
+
+
+
+
+
+
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z\d\-\.\+]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(t.test(e.href)||r.test(e.href))&&(e.href=a.dataset.original)})});</script><script>(r=>{r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,o=r.imageLazyLoadSetting.preloadRatio||1,d=i();function i(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=i());for(var e,n=0;n<d.length;n++)0<=(e=(e=d[n]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*o||document.documentElement.clientHeight*o)&&(()=>{var t,e,a,o,i=d[n];e=function(){d=d.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,o=t.getAttribute("data-original"),a.onload=function(){t.src=o,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=o},t.src!==o&&(a.src=o)))})()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)})(this);</script></body>
+</html>
